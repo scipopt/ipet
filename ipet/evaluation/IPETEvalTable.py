@@ -1888,7 +1888,7 @@ class IPETEvaluation(IpetNode):
         colaggpart.columns = newnames
 
         if self.getColIndex() == []:
-            ret = pd.DataFrame(generalpart.append(colaggpart.iloc[0])).T
+            ret = pd.DataFrame(pd.concat([generalpart,colaggpart.iloc[0]])).T
             return ret
         else:
             # determine the row in the aggregated table corresponding to the default group
