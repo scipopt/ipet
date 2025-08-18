@@ -173,13 +173,12 @@ if __name__ == '__main__':
     experiment = setup_experiment(arguments, verbose=True)
 
 
-    if type(arguments.logfiles) != io.TextIOWrapper:
+    if not isinstance(arguments.logfiles, io.TextIOWrapper):
         import multiprocessing as mp
-        import tqdm
+        from tqdm import tqdm
 
         nthreads = mp.cpu_count() if arguments.jobs == -1 else arguments.jobs
-        pool = mp.Pool(nthreads)
-        logger.info("Start parsing process using {} threads".format(nthreads))
+        logger.info("Start parsing process using %s threads", nthreads)
 
         # group the input files by their base names, to process related out and err files together
         # META files are automatically picked up internally upon creation of a TestRun object
@@ -187,14 +186,12 @@ if __name__ == '__main__':
         for f in arguments.logfiles:
             logfiles2basename.setdefault(os.path.splitext(f)[0], []).append(f)
 
-
         tasks = [(outfiles, arguments) for outfiles in logfiles2basename.values()]
-        for _ in tqdm.tqdm(pool.imap_unordered(process_one_outfiles_group, tasks), total=len(tasks)):
-            pass
 
-        pool.close()
-        pool.join()
-
+        # use Pool as a context manager -> automatic cleanup (no close/join needed)
+        with mp.Pool(nthreads) as pool:
+            for _ in tqdm(pool.imap_unordered(process_one_outfiles_group, tasks), total=len(tasks)):
+                pass
     else:
         experiment.addStdinput()
         experiment.collectData()
