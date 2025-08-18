@@ -15,12 +15,6 @@ from setuptools import setup
 with open("ipet/version.py") as f:
     exec(f.read())
 
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except(IOError, ImportError):
-    long_description = "Interactive Performance Evaluation tools, see README.md"
-
 packages = ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation']
 requirementslist = ['requirements.txt']
 
@@ -36,7 +30,7 @@ kwargs = {
     "packages": ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation'],
     "package_data": dict(ipet = ["../images/*.png"]),
     "description": "Interactive Performance Evaluation Tools",
-    "long_description": long_description,
+    "long_description": "Interactive Performance Evaluation tools, see README.md",
     "author": "Gregor Hendel",
     "maintainer": "Gregor Hendel",
     "author_email": "hendel@zib.de",

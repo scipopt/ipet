@@ -23,7 +23,6 @@ import re
 import logging
 #from IPython.utils.text import dedent
 import textwrap
-import pypandoc
 
 DEFAULT_FORMATSTR = "{idx} {d}"
 
@@ -90,7 +89,6 @@ argparser.add_argument("-f", "--formatstr", default = DEFAULT_FORMATSTR,
                                    )
 argparser.add_argument("-v", "--validatedual", action = "store_true", default = Experiment.DEFAULT_VALIDATEDUAL, help = "Enable dual validation, relative to 'gaptol' parameter")
 argparser.add_argument("-g", "--gaptol", type = float, default = Experiment.DEFAULT_GAPTOL, help = "relative tolerance for primal and dual objective validation")
-argparser.add_argument("--docmode", action = "store_true", default = False, help = "print this help as restructured text")
 argparser.add_argument("--csv", action = "store_true", default = False, help = "print the data as csv")
 argparser.add_argument("-j", "--jobs", default = -1, type=int, help = "number of threads to use (-1 for all available threads)")
 
@@ -161,10 +159,6 @@ if __name__ == '__main__':
     ch = logging.StreamHandler(sys.stdout)
     ch.setFormatter(formatter)
     logger.addHandler(ch)
-
-    if arguments.docmode:
-        print(pypandoc.convert_text(formatstrExamples, "rst", "md"))
-        exit()
 
     if arguments.debug:
         logger.setLevel(logging.DEBUG)
