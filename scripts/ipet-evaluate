@@ -121,7 +121,6 @@ for name, default, short, description in clarguments:
 
 argparser.add_argument('-t', '--testrunfiles', nargs = '*', default = [], help = "list of .trn files that should used for the evaluation")
 
-argparser.add_argument("-A", "--showapp", action = "store_true", default = False, help = "Display the Evaluation Editor app to modify the evaluation")
 argparser.add_argument("-l", "--long", action = "store_true", default = False, help = "use for long output (instancewise and aggregated results)")
 argparser.add_argument("-D", "--debug", action = "store_true", default = False, help = "Enable debug output to console during parsing")
 argparser.add_argument('-s', '--saveexperiment', action = "store_true", default = False, help = "Should the experiment data be overwritten? Makes only sense if combined with '--recollect True'")
@@ -268,25 +267,6 @@ if __name__ == '__main__':
                 logger.info("    " + key)
         logger.info("End key enumeration")
         exit(0)
-
-    if arguments.showapp:
-        from ipetgui import IpetEvaluationEditorApp, ExperimentManagement
-        from PyQt4.Qt import QApplication
-
-        application = QApplication(sys.argv)
-        application.setApplicationName("Evaluation editor")
-        mainwindow = IpetEvaluationEditorApp()
-        try:
-            mainwindow.setEvaluation(theeval)
-        except:
-            pass
-        ExperimentManagement.setExperiment(experiment)
-        mainwindow.setExperiment(ExperimentManagement.getExperiment())
-
-        theeval.evaluate(ExperimentManagement.getExperiment())
-        mainwindow.show()
-
-        sys.exit(application.exec_())
 
     # returntable and returnaggregation
     rettab, retagg = theeval.evaluate(experiment)

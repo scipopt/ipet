@@ -21,21 +21,8 @@ try:
 except(IOError, ImportError):
     long_description = "Interactive Performance Evaluation tools, see README.md"
 
-try:
-    from PyQt4.Qt import PYQT_VERSION_STR
-    withgui = True
-except ImportError:
-    withgui = False
-    pass
-
-
 packages = ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation']
-if withgui:
-    packages.append('ipetgui')
-
 requirementslist = ['requirements.txt']
-if withgui:
-    requirementslist.append('requirements-gui.txt')
 
 required = []
 for r in requirementslist:
@@ -46,7 +33,7 @@ for r in requirementslist:
 kwargs = {
     "name": "ipet",
     "version": str(__version__),
-    "packages": ['ipet', 'ipetgui', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation'],
+    "packages": ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation'],
     "package_data": dict(ipet = ["../images/*.png"]),
     "description": "Interactive Performance Evaluation Tools",
     "long_description": long_description,

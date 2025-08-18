@@ -48,8 +48,6 @@ It is planned to make ipet available via the Python package indexer PyPi.
 
 IPET was originally written in Python2.7 and recently converted into Python3.
 It consists of two modules, *ipet* together with several submodules, and *ipetgui*.
-The use of the graphical user interface requires that the PyQt4 bindings for
-Python3 are available on your system.
 We give installation instructions for the Linux operating system. Since the code is
 written in python only, it should also work on other platforms. We assume that you either
 have sudo-privileges on your target architecture, or are able to create a python3
@@ -60,13 +58,6 @@ virtual environment. You can test if virtual environments are available by runni
 
 If your target system does not provide virtual environments, please contact your system administrator
 before you continue.
-
-Running the graphical user interface of IPET requires PyQt4 for python3. In order to test if
-your system has PyQt4, execute
-
-    python3 -c "from PyQt4 import QtCore,QtGui; print(\"PyQt4 is ready\")"
-
-We provide a script called "install-pyqt4-in-virtual-environment.sh" to install PyQt4-bindings inside a virtual environment.
 
 ## Linux installation inside a virtual environment
 
@@ -88,18 +79,11 @@ to use a differently named virtual environment somewhere else, of course.
 
         deactivate
 
-2. (*optional* step to install the graphical user interface, for command line only skip to next step) 
-Install PyQt4 bindings inside your virtual environment by calling the provided script,
-which assumes that you are running inside the virtual environment "venv" or the one specified by the optional path.
-The script will ask you to carefully read and accept the license agreement for using PyQt4 bindings.
-
-        ./install-pyqt4-in-virtual-environment.sh [optional path to virtual environment root]
-
-3. Execute the command (note that it does no longer require to mention python3 because we are running inside the virtual environment)
+2. Execute the command (note that it does no longer require to mention python3 because we are running inside the virtual environment)
 
         pip install .
 
-4. As a developer, it might be useful to call the following command instead:
+3. As a developer, it might be useful to call the following command instead:
 
         pip install -e .
         
@@ -123,9 +107,6 @@ or
 This step makes imports available systemwide such as
 
     python3 -c "from ipet import *"
-
-The installation process will recognize if you have PyQt4 bindings available on your system, which are necessary to
-use the graphical user interface.
 
 ## Testing your installation
 
