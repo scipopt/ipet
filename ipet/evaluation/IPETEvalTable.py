@@ -20,7 +20,7 @@ from ipet.misc import misc
 import logging
 from ipet import Experiment
 from ipet import Key
-from pandas.core.frame import DataFrame
+from pandas import DataFrame
 from numpy import isnan
 from ipet.evaluation.IPETFilter import IPETValue
 from ipet.misc.misc import meanOrConcat
