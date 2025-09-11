@@ -21,7 +21,8 @@ class VariableReader(StatisticReader):
     name = 'VariableReader'
     varexp = re.compile(r'^  Variables        :')
     consexp = re.compile(r'^  Constraints      :')
-    varkeys = ['Vars', 'BinVars', 'IntVars', 'ImplVars', 'ContVars']
+    varkeys_old = ['Vars', 'BinVars', 'IntVars', 'ImplVars', 'ContVars']
+    varkeys_new = ['Vars', 'BinVars', 'IntVars', 'ContVars']
     conskeys = ["InitialNCons", "MaxNCons"]
     problemtype = None
     
@@ -35,8 +36,11 @@ class VariableReader(StatisticReader):
      
         # check if the SCIP variable expression is matched by line
         elif self.problemtype and self.varexp.match(line):
-            nvariables = list(map(int, misc.numericExpression.findall(line)[:len(self.varkeys)]))
-            datakeys = ["%s_%s" % (self.problemtype, key) for key in self.varkeys]
+            nvariables = list(map(int, misc.numericExpression.findall(line)[:len(self.varkeys_old)]))
+            if len(nvariables) == len(self.varkeys_old) :
+               datakeys = ["%s_%s" % (self.problemtype, key) for key in self.varkeys_old]
+            else :
+               datakeys = ["%s_%s" % (self.problemtype, key) for key in self.varkeys_new]
             self.addData(datakeys, nvariables)
 
         # check if the constraint expression is matched by line
