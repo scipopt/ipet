@@ -38,7 +38,7 @@ cite it using the following bibtex item:
 
 In the following installation instructions, we will assume that you clone the IPET repository by
 
-    git clone https://github.com/GregorCH/ipet.git
+    git clone https://github.com/scipopt/ipet.git
 
 or download and unzip one of the available zipped archieves into a local directory called "ipet".
 
@@ -47,7 +47,6 @@ It is planned to make ipet available via the Python package indexer PyPi.
 # Installation and prerequisites
 
 IPET was originally written in Python2.7 and recently converted into Python3.
-It consists of two modules, *ipet* together with several submodules, and *ipetgui*.
 We give installation instructions for the Linux operating system. Since the code is
 written in python only, it should also work on other platforms. We assume that you either
 have sudo-privileges on your target architecture, or are able to create a python3
@@ -97,12 +96,12 @@ to use a differently named virtual environment somewhere else, of course.
 If you would like to install *IPET* systemwide, all you need to do is
 
     cd ipet
-    python3 setup.py install --user
+    python3 -m pip install . --user
 
 or
 
     cd ipet
-    sudo python3 setup.py install
+    sudo python3 -m pip install .
 
 This step makes imports available systemwide such as
 
