@@ -27,7 +27,7 @@ class StatisticReader(IpetNode):
     """
 
     name = 'NO_NAME_DEFINED_YET'
-    regular_exp = re.compile('')
+    regular_exp = re.compile(r'')
     datakey = 'NO KEY'
     datatype = float
     lineindex = -1
@@ -142,7 +142,7 @@ class NodeNameReader(StatisticReader):
     """
     context = [Key.CONTEXT_LOGFILE]
 
-    nodenameexp = re.compile('^Linux (\S*) .* GNU/Linux')
+    nodenameexp = re.compile(r'^Linux (\S*) .* GNU/Linux')
     name = 'NodeNameReader'
     datakey = Key.NodeName
     nodename = None
@@ -174,7 +174,7 @@ class MetaDataReader(StatisticReader):
     """
     context = [Key.CONTEXT_METAFILE, Key.CONTEXT_LOGFILE, Key.CONTEXT_ERRFILE]
 
-    metadataexp = re.compile("^@\S{3,}\s+\S+$")
+    metadataexp = re.compile(r"^@\S{3,}\s+\S+$")
     name = 'MetaDataReader'
     datakey = Key.MetaData
 
@@ -200,7 +200,7 @@ class BestSolInfeasibleReader(StatisticReader):
     @return: False if above expression is found in the log and the best solution is thus not feasible, otherwise True
     """
     name = 'BestSolInfeasibleReader'
-    regular_exp = re.compile('best solution is not feasible in original problem')
+    regular_exp = re.compile(r'best solution is not feasible in original problem')
     datakey = Key.BestSolutionInfeasible
 
     def extractStatistic(self, line):
@@ -235,7 +235,7 @@ class DualLPTimeReader(StatisticReader):
     reads the dual LP time
     """
     name = 'DualLPTimeReader'
-    regular_exp = re.compile('^  dual LP')
+    regular_exp = re.compile(r'^  dual LP')
     datakey = Key.DualLpTime
     datatype = float
     lineindex = 3
@@ -245,7 +245,7 @@ class ErrorFileReader(StatisticReader):
     reads information from error files
     """
     name = "ErrorFileReader"
-    regular_exp = re.compile("returned with error code (\d+)")
+    regular_exp = re.compile(r"returned with error code (\d+)")
     datakey = Key.ErrorCode
     context = Key.CONTEXT_ERRFILE
 
@@ -264,8 +264,8 @@ class SettingsFileReader(StatisticReader):
     nodeselection/bfs/stdpriority = 1000000
     """
     name = "SettingsFileReader"
-    regular_exp_name = re.compile("^([\w/]+) = (\S+)")
-    regular_exp_type = re.compile("^# \[type: (\w+),.*default: ([^\]]+)\]")
+    regular_exp_name = re.compile(r"^([\w/]+) = (\S+)")
+    regular_exp_type = re.compile(r"^# \[type: (\w+),.*default: ([^\]]+)\]")
     context = Key.CONTEXT_SETFILE
 
     typemap = {
@@ -302,7 +302,7 @@ class GapReader(StatisticReader):
     reads the primal dual gap at the end of the solving
     """
     name = 'GapReader'
-    regular_exp = re.compile('^Gap                :')
+    regular_exp = re.compile(r'^Gap                :')
     datakey = Key.Gap
     datatype = float
     lineindex = 2
@@ -321,7 +321,7 @@ class MaxDepthReader(StatisticReader):
     reads the maximum depth
     """
     name = 'MaxDepthReader'
-    regular_exp = re.compile('  max depth        :')
+    regular_exp = re.compile(r'  max depth        :')
     datakey = Key.MaximumDepth
     datatype = int
     lineindex = 3
@@ -331,20 +331,20 @@ class NodesReader(StatisticReader):
     reads the total number of solving nodes of the branch and bound search
     """
     name = 'NodesReader'
-    regular_exp = re.compile("^  nodes \(total\)    :")
+    regular_exp = re.compile(r"^  nodes \(total\)    :")
     datakey = Key.Nodes
     datatype = int
     lineindex = 3
 
 class ObjsenseReader(StatisticReader):
     name = 'ObjsenseReader'
-    regular_exp = re.compile("^  Objective        : (\w*),")
+    regular_exp = re.compile(r"^  Objective        : (\w*),")
     datakey = Key.ObjectiveSense
     minimize = 1
     maximize = -1
     orig_prob_state = False
-    orig_prob_expr = re.compile('^Original Problem   :')
-    pres_prob_expr = re.compile('^Presolved Problem  :')
+    orig_prob_expr = re.compile(r'^Original Problem   :')
+    pres_prob_expr = re.compile(r'^Presolved Problem  :')
 
     def extractStatistic(self, line):
         if self.orig_prob_expr.match(line):
@@ -364,7 +364,7 @@ class ObjsenseReader(StatisticReader):
 
 class ObjlimitReader(StatisticReader):
     name = "ObjlimitReader"
-    regular_exp = re.compile("objective value limit set to")
+    regular_exp = re.compile(r"objective value limit set to")
     datakey = Key.ObjectiveLimit
     datatype = float
     lineindex = 5
@@ -374,7 +374,7 @@ class RootNodeFixingsReader(StatisticReader):
     reads the number of variable fixings during root node
     """
     name = 'RootNodeFixingsReader'
-    regular_exp = re.compile('^  root node')
+    regular_exp = re.compile(r'^  root node')
     datakey = Key.RootNodeFixings
     datatype = int
     lineindex = 4
@@ -400,7 +400,7 @@ class TimeLimitReader(StatisticReader):
 
 class TimeToBestReader(StatisticReader):
     name = 'TimeToBestReader'
-    regular_exp = re.compile('  Primal Bound     :')
+    regular_exp = re.compile(r'  Primal Bound     :')
     datakey = Key.TimeToBestSolution
     datatype = float
     lineindex = 3
@@ -414,7 +414,7 @@ class TimeToBestReader(StatisticReader):
 
 class TimeToFirstReader(StatisticReader):
     name = 'TimeToFirstReader'
-    regular_exp = re.compile('  First Solution   :')
+    regular_exp = re.compile(r'  First Solution   :')
     datakey = Key.TimeToFirstSolution
     datatype = float
     lineindex = 3

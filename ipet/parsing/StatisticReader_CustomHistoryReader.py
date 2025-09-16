@@ -22,9 +22,9 @@ class CustomHistoryReader(StatisticReader):
     """
 
     name = 'CustomHistoryReader'
-    regular_exp = re.compile('\|')  # compile the regular expression to speed up reader
+    regular_exp = re.compile(r'\|')  # compile the regular expression to speed up reader
     datakey = 'somehistory'
-    heuristicdispcharexp = re.compile('[a-zA-Z*]')
+    heuristicdispcharexp = re.compile(r'[a-zA-Z*]')
     numericexpression = misc.tablenumericExpression  # use the sophisticated numeric expression from the Custom Reader
 
     def __init__(self, listofheaders, listofindices=[], name='', collectheuristics=-1):

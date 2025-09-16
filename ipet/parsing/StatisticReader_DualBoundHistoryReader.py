@@ -21,7 +21,7 @@
 #    """
 #
 #    name = 'DualBoundHistoryReader'
-#    regular_exp = re.compile('\|')  # compile the regular expression to speed up reader
+#    regular_exp = re.compile(r'\|')  # compile the regular expression to speed up reader
 #    datakey = 'dualboundhistory'
 #    dbindex = -1
 #    timeindex = 0

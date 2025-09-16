@@ -16,8 +16,8 @@
 #
 #class PrimalBoundHistoryReader(StatisticReader):
 #    name = 'PrimalBoundHistoryReader'
-#    regular_exp = re.compile('^\s+time\s+\| .* \|\s+primalbound\s+\|\s+gap')
-#    ugtableexp = re.compile('^\s+Time\s+Nodes')
+#    regular_exp = re.compile(r'^\s+time\s+\| .* \|\s+primalbound\s+\|\s+gap')
+#    ugtableexp = re.compile(r'^\s+Time\s+Nodes')
 #    columnwidth = 20
 #    datakey = 'PrimalBoundHistory'
 #    columnheaderstr = 'PrimalBoundHistory'.rjust(columnwidth)
@@ -26,12 +26,12 @@
 #    listOfPoints = []
 #    easyCPLEX = True
 #    totalnumberofsols = 0
-#    heurdispcharexp = re.compile('^[^ \d]')
-#    heurdispcharexpugmode = re.compile('^\*')
+#    heurdispcharexp = re.compile(r'^[^ \d]')
+#    heurdispcharexpugmode = re.compile(r'^\*')
 #    """ all lines starting with a non-whitespace and non-digit character """
 #
-#    shorttablecheckexp = re.compile('s\|')
-#    firstsolexp = re.compile('^  First Solution   :')
+#    shorttablecheckexp = re.compile(r's\|')
+#    firstsolexp = re.compile(r'^  First Solution   :')
 #
 #    testnumberofsols = 0
 #    gurobiextralist = []
