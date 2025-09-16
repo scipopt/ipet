@@ -9,7 +9,7 @@ description = "Interactive Performance Evaluation Tools"
 license = "MIT"
 requires-python = ">= 3.11"
 readme = "README.md"
-dynamic = ["dependencies", "optional-dependencies"]
+dynamic = ["dependencies"]
 
 authors = [
   { name = "Zuse Institute Berlin", email = "hendel@zib.de" }
@@ -32,5 +32,4 @@ classifiers = [
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
-optional-dependencies.dev = {file = ["requirements-dev.txt"]}
 
