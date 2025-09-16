@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 The MIT License (MIT)
 
@@ -12,40 +11,6 @@ please refer to README.md for how to cite IPET.
 """
 from setuptools import setup
 
-with open("ipet/version.py") as f:
-    exec(f.read())
-
 packages = ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation']
-requirementslist = ['requirements.txt']
 
-required = []
-for r in requirementslist:
-    with open(r, 'r') as requirements:
-        required.append(requirements.read().splitlines())
-
-
-kwargs = {
-    "name": "ipet",
-    "version": str(__version__),
-    "packages": ['ipet', 'ipet.concepts', 'ipet.evaluation', 'ipet.misc', 'ipet.parsing', 'ipet.validation'],
-    "package_data": dict(ipet = ["../images/*.png"]),
-    "description": "Interactive Performance Evaluation Tools",
-    "long_description": "Interactive Performance Evaluation tools, see README.md",
-    "author": "Gregor Hendel",
-    "maintainer": "Gregor Hendel",
-    "author_email": "hendel@zib.de",
-    "maintainer_email": "hendel@zib.de",
-    "install_requires": required,
-    "url": "https://github.com/GregorCH/ipet",
-    "download_url": "https://github.com/GregorCH/ipet/archive/master.zip",
-    "keywords": "Mathematical Optimization solver log benchmark parser",
-    "classifiers": [
-        "Programming Language :: Python",
-        "Topic :: Software Development",
-        "Topic :: Software Development :: Libraries",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-    ],
-    "scripts": ["scripts/ipet-parse", "scripts/ipet-evaluate", "scripts/ipet-rank"]
-}
-
-setup(**kwargs)
+setup(packages=packages)
