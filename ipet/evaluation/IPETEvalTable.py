@@ -997,7 +997,9 @@ class IPETEvaluation(IpetNode):
             if col.getCompareMethod() is not None:
 
                 df_bar = df.set_index(self.getRowIndex(), drop = True)
-                grouped = df_bar.groupby(by = self.getColIndex())[col.getName()]
+                colindex = self.getColIndex()
+                grouped = df_bar.groupby(
+                      by = colindex if len(colindex) > 1 else colindex[0])[col.getName()]
                 compcol = dict(list(grouped))[dg]
                 comparecolname = col.getCompareColName()
 
@@ -1932,7 +1934,9 @@ class IPETEvaluation(IpetNode):
         if self.getColIndex() == []:
             return None
         # group the data
-        groupeddata = dict(list(df.groupby(by = self.getColIndex())))
+        colindex = self.getColIndex()
+        groupeddata = dict(list(df.groupby(
+           by = colindex if len(colindex) > 1 else colindex[0])))
         stats = []
         names = []
         dg = self.getDefaultgroup(df)
