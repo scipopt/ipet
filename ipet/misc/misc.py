@@ -22,9 +22,9 @@ from ipet import Key
 FLOAT_INFINITY = 1e20
 FLOAT_LARGE = 1e15
 DEFAULT_MIN_GEOM_MEAN = 1.0
-numericExpression = re.compile("([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+)")
-numericExpressionOrInf = re.compile("([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+|inf)")
-tablenumericExpression = re.compile("([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+|cutoff)")
+numericExpression = re.compile(r"([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+)")
+numericExpressionOrInf = re.compile(r"([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+|inf)")
+tablenumericExpression = re.compile(r"([+\-]*[\d]+[.\d]*(?:e[+-])?-*[\d]*[kMG]{0,1}|[\-]+|cutoff)")
 wordExpression = re.compile(r'[^\s]+')
 useStringSplit = False
 

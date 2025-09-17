@@ -20,7 +20,7 @@ from ipet.misc import misc
 import logging
 from ipet import Experiment
 from ipet import Key
-from pandas.core.frame import DataFrame
+from pandas import DataFrame
 from numpy import isnan
 from ipet.evaluation.IPETFilter import IPETValue
 from ipet.misc.misc import meanOrConcat
@@ -997,7 +997,9 @@ class IPETEvaluation(IpetNode):
             if col.getCompareMethod() is not None:
 
                 df_bar = df.set_index(self.getRowIndex(), drop = True)
-                grouped = df_bar.groupby(by = self.getColIndex())[col.getName()]
+                colindex = self.getColIndex()
+                grouped = df_bar.groupby(
+                      by = colindex if len(colindex) > 1 else colindex[0])[col.getName()]
                 compcol = dict(list(grouped))[dg]
                 comparecolname = col.getCompareColName()
 
@@ -1888,7 +1890,7 @@ class IPETEvaluation(IpetNode):
         colaggpart.columns = newnames
 
         if self.getColIndex() == []:
-            ret = pd.DataFrame(generalpart.append(colaggpart.iloc[0])).T
+            ret = pd.DataFrame(pd.concat([generalpart,colaggpart.iloc[0]])).T
             return ret
         else:
             # determine the row in the aggregated table corresponding to the default group
@@ -1932,7 +1934,9 @@ class IPETEvaluation(IpetNode):
         if self.getColIndex() == []:
             return None
         # group the data
-        groupeddata = dict(list(df.groupby(by = self.getColIndex())))
+        colindex = self.getColIndex()
+        groupeddata = dict(list(df.groupby(
+           by = colindex if len(colindex) > 1 else colindex[0])))
         stats = []
         names = []
         dg = self.getDefaultgroup(df)

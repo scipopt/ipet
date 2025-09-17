@@ -179,14 +179,14 @@ class Validation:
     def getPbValue(self, pb : float, objsense : int) -> float:
         """returns a floating point value computed from a given primal bound
         """
-        if pd.isnull(pb):
+        if pd.isna(pb):
             pb = infty() if objsense == ObjectiveSenseCode.MINIMIZE else -infty()
         return pb
 
     def getDbValue(self, db : float, objsense : int) -> float :
         """returns a floating point value computed from a given primal bound
         """
-        if pd.isnull(db):
+        if pd.isna(db):
             db = -infty() if objsense == ObjectiveSenseCode.MINIMIZE else infty()
         return db
 
@@ -223,8 +223,8 @@ class Validation:
             # if the solution checker failed to read in the solution, or the solution checker crashed and did
             # not report the result of the check command, the solution was most likely infeasible.
             #
-            if not pd.isnull(x.get(Key.SolCheckerRead)) and x.get(Key.SolCheckerRead):
-                if not pd.isnull(x.get(Key.SolCheckerFeas)) and x.get(Key.SolCheckerFeas):
+            if not pd.isna(x.get(Key.SolCheckerRead)) and x.get(Key.SolCheckerRead):
+                if not pd.isna(x.get(Key.SolCheckerFeas)) and x.get(Key.SolCheckerFeas):
                     return True
                 else:
                     return False
@@ -254,8 +254,8 @@ class Validation:
         # respect solution checker output, if it exists
         #
         if x.get(Key.SolCheckerRead) is not None:
-            if not pd.isnull(x.get(Key.SolCheckerRead)) and x.get(Key.SolCheckerRead):
-                if not pd.isnull(x.get(Key.SolCheckerFeas)) and x.get(Key.SolCheckerFeas):
+            if not pd.isna(x.get(Key.SolCheckerRead)) and x.get(Key.SolCheckerRead):
+                if not pd.isna(x.get(Key.SolCheckerFeas)) and x.get(Key.SolCheckerFeas):
                     return False
                 else:
                     return True
@@ -266,7 +266,7 @@ class Validation:
         maxviol = max((x.get(key, 0.0) for key in [Key.ViolationBds, Key.ViolationCons, Key.ViolationInt, Key.ViolationLP]))
 
         # if no violations have been recorded, no solution was found, and the solution is not infeasible.
-        if pd.isnull(maxviol):
+        if pd.isna(maxviol):
             return False
 
         return maxviol > self.feastol
@@ -317,7 +317,7 @@ class Validation:
         """
         if problemname in self.objsensedict:
             return self.objsensedict[problemname]
-        elif not pd.isnull(x.get(Key.ObjectiveSense, None)):
+        elif not pd.isna(x.get(Key.ObjectiveSense, None)):
             return x.get(Key.ObjectiveSense)
         else:
             logger.warning("No objective sense for {}, assuming minimization".format(problemname))
@@ -341,7 +341,7 @@ class Validation:
         if not problemname:
             return ProblemStatusCodes.Unknown
 
-        if pd.isnull(sstatus):
+        if pd.isna(sstatus):
             return ProblemStatusCodes.FailAbort
 
 
@@ -350,7 +350,7 @@ class Validation:
             # check feasibility
             #
             pb = x.get(Key.PrimalBound)
-            if self.isSolInfeasible(x) or not (pd.isnull(pb) or isInf(pb) or self.isLE(x.get(Key.ObjectiveLimit, -1e20), pb) or self.isSolFeasible(x)):
+            if self.isSolInfeasible(x) or not (pd.isna(pb) or isInf(pb) or self.isLE(x.get(Key.ObjectiveLimit, -1e20), pb) or self.isSolFeasible(x)):
                 return ProblemStatusCodes.FailSolInfeasible
 
             #
@@ -480,7 +480,7 @@ class Validation:
             return ProblemStatusCodes.Ok
 
         elif self.isInf(reference):
-            if sstatus != SolverStatusCodes.Infeasible and not pd.isnull(pb) and not isInf(pb):
+            if sstatus != SolverStatusCodes.Infeasible and not pd.isna(pb) and not isInf(pb):
                 return ProblemStatusCodes.FailSolOnInfeasibleInstance
 
         elif self.isFeas(reference):
@@ -510,7 +510,7 @@ class Validation:
 
         obs = self.getObjSense(problemname, x)
 
-        if pd.isnull(obs):
+        if pd.isna(obs):
             obs = ObjectiveSenseCode.MINIMIZE
 
         if not problemname:
@@ -525,7 +525,7 @@ class Validation:
             return
 
         # do not trust versions/settings/solvers that returned an infeasible solution
-        if self.isSolInfeasible(x) or (not pd.isnull(pb) and not self.isSolFeasible(x)):
+        if self.isSolInfeasible(x) or (not pd.isna(pb) and not self.isSolFeasible(x)):
             return
 
         pb = self.getPbValue(pb, obs)

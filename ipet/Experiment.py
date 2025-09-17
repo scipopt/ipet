@@ -170,7 +170,7 @@ class Experiment:
         """ Add a filename pointing to an external file, eg a solu file with additional information
         """
         try:
-            self.externaldata = pd.read_table(filename, sep = " *", engine = 'python', header = 1, skipinitialspace = True)
+            self.externaldata = pd.read_csv(filename, sep = " *", engine = 'python', header = 1, skipinitialspace = True)
             self.updateDatakeys()
             logger.debug("Experiment read external data file %s" % filename)
             logger.debug("%s" % self.externaldata.head(5))
@@ -206,7 +206,7 @@ class Experiment:
     def concatenateData(self):
         """ Concatenate data over all run TestRuns
         """
-        self.data = pd.concat([tr.data for tr in self.getTestRuns()])
+        self.data = pd.concat([tr.data for tr in self.getTestRuns()], sort=False)
 
     def calculateGaps(self):
         """ Calculate and store primal and dual gap
@@ -247,7 +247,7 @@ class Experiment:
             datalist.append(trdata)
 
         # return pd.concat(datalist, sort=True).infer_objects() # in later pandas versions this needs a sort argument
-        self.joineddata = pd.concat(datalist).infer_objects()
+        self.joineddata = pd.concat(datalist, sort=False).infer_objects()
 
         return self.joineddata
 
@@ -329,12 +329,3 @@ class Experiment:
             return None
         else:
             return comp
-
-    def getDataPanel(self, onlyactive = False):
-        """ Return a pandas Data Panel of testrun data
-
-        Create a panel from testrun data, using the testrun settings as key
-        Set onlyactive to True to only get active testruns as defined by the testrun manager
-        """
-        trdatadict = {tr.getSettings():tr.data for tr in self.getTestRuns(onlyactive)}
-        return pd.Panel(trdatadict)

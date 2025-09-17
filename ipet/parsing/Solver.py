@@ -417,30 +417,30 @@ class Solver():
 class SCIPSolver(Solver):
 
     solverId = "SCIP"
-    recognition_expr = re.compile("^SCIP version ")
-    primalbound_expr = re.compile("^Primal Bound       : (\S+)")
-    dualbound_expr = re.compile("^Dual Bound         : (\S+)")
-    solvingtime_expr = re.compile("^Solving Time \(sec\) : (\S+)")
-    version_expr = re.compile("SCIP version (\S+)")
-    limitreached_expr = re.compile("((?:^SCIP Status        :)|(?:\[(?:.*) (reached|interrupt)\]))")
-    nodes_expr = re.compile("(?:Solving Nodes      : *\d+ \(total of (\d+) nodes in \d+ runs\)$|Solving Nodes      : *(\d+)$|  nodes \(total\)    : *(\d+) \()")
-    extrasol_expr = re.compile("^feasible solution found .* after (.*) seconds, objective value (\S*)")
-    soplexgithash_expr = re.compile("^  SoPlex .+\[GitHash: (\S+)\]")
-    violbound_expr = re.compile("^  bounds           : \S+ (\S+)$")
-    violint_expr = re.compile("^  integrality      : (\S+)")
-    viollp_expr = re.compile("^  LP rows          : \S+ (\S+)$")
-    violcons_expr = re.compile("^  constraints      : \S+ (\S+)$")
+    recognition_expr = re.compile(r"^SCIP version ")
+    primalbound_expr = re.compile(r"^Primal Bound       : (\S+)")
+    dualbound_expr = re.compile(r"^Dual Bound         : (\S+)")
+    solvingtime_expr = re.compile(r"^Solving Time \(sec\) : (\S+)")
+    version_expr = re.compile(r"SCIP version (\S+)")
+    limitreached_expr = re.compile(r"((?:^SCIP Status        :)|(?:\[(?:.*) (reached|interrupt)\]))")
+    nodes_expr = re.compile(r"(?:Solving Nodes      : *\d+ \(total of (\d+) nodes in \d+ runs\)$|Solving Nodes      : *(\d+)$|  nodes \(total\)    : *(\d+) \()")
+    extrasol_expr = re.compile(r"^feasible solution found .* after (.*) seconds, objective value (\S*)")
+    soplexgithash_expr = re.compile(r"^  SoPlex .+\[GitHash: (\S+)\]")
+    violbound_expr = re.compile(r"^  bounds           : \S+ (\S+)$")
+    violint_expr = re.compile(r"^  integrality      : (\S+)")
+    viollp_expr = re.compile(r"^  LP rows          : \S+ (\S+)$")
+    violcons_expr = re.compile(r"^  constraints      : \S+ (\S+)$")
 
     # variables needed for primal bound history
-    primalboundhistory_exp = re.compile('^\s+time\s+\| .* \|\s+primalbound\s+\|\s+gap')
-    heurdispcharexp = re.compile('^[^ \d]')
+    primalboundhistory_exp = re.compile(r'^\s+time\s+\| .* \|\s+primalbound\s+\|\s+gap')
+    heurdispcharexp = re.compile(r'^[^ \d]')
     """ all lines starting with a non-whitespace and non-digit character """
 
-    shorttablecheckexp = re.compile('s\|')
-    firstsolexp = re.compile('^  First Solution   :')
+    shorttablecheckexp = re.compile(r's\|')
+    firstsolexp = re.compile(r'^  First Solution   :')
 
     # variables needed for dual bound history
-    regular_exp = re.compile('\|')  # compile the regular expression to speed up reader
+    regular_exp = re.compile(r'\|')  # compile the regular expression to speed up reader
 
     solverstatusmap = {
         "no problem exists" : Key.SolverStatusCodes.Readerror,
@@ -570,18 +570,18 @@ class FiberSCIPSolver(SCIPSolver):
     """Reads data from FiberSCIP output, that ressembles SCIP output a lot, except for the table.
     """
     solverId = "FiberSCIP"
-    recognition_expr = re.compile("^The following solver is parallelized by UG")
-    primalbound_expr = re.compile("^  Primal Bound     : (\S+)")
-    dualbound_expr = re.compile("^  Dual Bound       : (\S+)")
-    solvingtime_expr = re.compile("^Total Time         : (\S+)")
-    version_expr = re.compile("^The following solver is parallelized by UG version (\S+)")
-    nodes_expr = re.compile("  nodes \(total\)    : *(\d+)")
+    recognition_expr = re.compile(r"^The following solver is parallelized by UG")
+    primalbound_expr = re.compile(r"^  Primal Bound     : (\S+)")
+    dualbound_expr = re.compile(r"^  Dual Bound       : (\S+)")
+    solvingtime_expr = re.compile(r"^Total Time         : (\S+)")
+    version_expr = re.compile(r"^The following solver is parallelized by UG version (\S+)")
+    nodes_expr = re.compile(r"  nodes \(total\)    : *(\d+)")
 
     # variables needed for primal bound history
-    heurdispcharexp = re.compile('^\* ')
+    heurdispcharexp = re.compile(r'^\* ')
     """ all lines starting with a single (!!!) asterisk. UG sometimes prints double asterisks """
 
-    ugtableexp = re.compile('^\s+Time\s+Nodes')
+    ugtableexp = re.compile(r'^\s+Time\s+Nodes')
 
     solverstatusmap = {
         "SCIP Status        : problem is solved" : Key.SolverStatusCodes.Optimal,
@@ -628,12 +628,12 @@ class FiberSCIPSolver(SCIPSolver):
 class GurobiSolver(Solver):
 
     solverId = "GUROBI"
-    recognition_expr = re.compile("Gurobi Optimizer version")
-    primalbound_expr = re.compile("^(?:Best|Optimal) objective +([^\s,]+),*")
-    dualbound_expr = re.compile("^(?:Best objective \S+, best bound|Optimal objective) +([^\s,]+),*")
-    solvingtime_expr = re.compile("^(?:Explored \d* nodes .* in|Solved in .* iterations and) (\S*) seconds")
-    version_expr = re.compile("Gurobi Optimizer version (\S+)")
-    nodes_expr = re.compile("Explored (\d+) nodes")
+    recognition_expr = re.compile(r"Gurobi Optimizer version")
+    primalbound_expr = re.compile(r"^(?:Best|Optimal) objective +([^\s,]+),*")
+    dualbound_expr = re.compile(r"^(?:Best objective \S+, best bound|Optimal objective) +([^\s,]+),*")
+    solvingtime_expr = re.compile(r"^(?:Explored \d* nodes .* in|Solved in .* iterations and) (\S*) seconds")
+    version_expr = re.compile(r"Gurobi Optimizer version (\S+)")
+    nodes_expr = re.compile(r"Explored (\d+) nodes")
 
     solverstatusmap = {"(Optimal solution found|Solved with barrier|Solved in \d+ iterations)" : Key.SolverStatusCodes.Optimal,
                        "Model is infeasible$" : Key.SolverStatusCodes.Infeasible,
@@ -718,15 +718,15 @@ class GurobiSolver(Solver):
 class CplexSolver(Solver):
 
     solverId = "CPLEX"
-    recognition_expr = re.compile("^Welcome to IBM\(R\) ILOG\(R\) CPLEX\(R\) Interactive Optimizer")
-    primalbound_expr = re.compile("^MIP -.*Objective =\s*(\S+)")
-    dualbound_expr = re.compile("^(?:Current MIP best bound|^MIP - Integer optimal solution:  Objective) =\s*(\S+)")
-    solvingtime_expr = re.compile("Solution time =\s*(\S+)")
-    version_expr = re.compile("^Welcome to IBM\(R\) ILOG\(R\) CPLEX\(R\) Interactive Optimizer (\S+)")
-    nodes_expr = re.compile("Solution time = .* sec\.  Iterations = \d+  Nodes = (\S+)")
+    recognition_expr = re.compile(r"^Welcome to IBM\(R\) ILOG\(R\) CPLEX\(R\) Interactive Optimizer")
+    primalbound_expr = re.compile(r"^MIP -.*Objective =\s*(\S+)")
+    dualbound_expr = re.compile(r"^(?:Current MIP best bound|^MIP - Integer optimal solution:  Objective) =\s*(\S+)")
+    solvingtime_expr = re.compile(r"Solution time =\s*(\S+)")
+    version_expr = re.compile(r"^Welcome to IBM\(R\) ILOG\(R\) CPLEX\(R\) Interactive Optimizer (\S+)")
+    nodes_expr = re.compile(r"Solution time = .* sec\.  Iterations = \d+  Nodes = (\S+)")
 
 
-    elapsedtime_expr = re.compile("^Elapsed time = .+ sec. \(.* ticks, tree = .* MB, solutions = \d+\)")
+    elapsedtime_expr = re.compile(r"^Elapsed time = .+ sec. \(.* ticks, tree = .* MB, solutions = \d+\)")
 
     solverstatusmap = {"MIP - Integer optimal" : Key.SolverStatusCodes.Optimal,
                        "MIP - Integer infeasible\." : Key.SolverStatusCodes.Infeasible,
@@ -824,12 +824,12 @@ class CplexSolver(Solver):
 class CbcSolver(Solver):
 
     solverId = "CBC"
-    recognition_expr = re.compile("Welcome to the CBC MILP Solver")
-    primalbound_expr = re.compile("^Objective value:\s*(\S*)")
-    dualbound_expr = re.compile("^(?:Lower bound\s*|Objective value\s*):\s*(\S*)")
-    solvingtime_expr = re.compile("Total time \(CPU seconds\):\s*(\S*)")
-    version_expr = re.compile("^Version: (\S+)")
-    nodes_expr = re.compile("^Enumerated nodes: *(\S+)")
+    recognition_expr = re.compile(r"Welcome to the CBC MILP Solver")
+    primalbound_expr = re.compile(r"^Objective value:\s*(\S*)")
+    dualbound_expr = re.compile(r"^(?:Lower bound\s*|Objective value\s*):\s*(\S*)")
+    solvingtime_expr = re.compile(r"Total time \(CPU seconds\):\s*(\S*)")
+    version_expr = re.compile(r"^Version: (\S+)")
+    nodes_expr = re.compile(r"^Enumerated nodes: *(\S+)")
 
     solverstatusmap = {"Result - Optimal solution found" : Key.SolverStatusCodes.Optimal,
                        "Result - Stopped on time limit" : Key.SolverStatusCodes.TimeLimit,
@@ -855,12 +855,12 @@ class CbcSolver(Solver):
 class XpressSolver(Solver):
 
     solverId = "XPRESS"
-    recognition_expr = re.compile("FICO Xpress")
-    primalbound_expr = re.compile("Objective value =\s*(\S*)")
-    dualbound_expr = re.compile("Best Bound =\s*(\S*)")
-    solvingtime_expr = re.compile(" \*\*\* Search.*\*\*\*\s*Time:\s*(\S*)")
-    version_expr = re.compile(".*Optimizer.* v([0-9.]*) ")
-    nodes_expr = re.compile("^Nodes explored = (.*)$")
+    recognition_expr = re.compile(r"FICO Xpress")
+    primalbound_expr = re.compile(r"Objective value =\s*(\S*)")
+    dualbound_expr = re.compile(r"Best Bound =\s*(\S*)")
+    solvingtime_expr = re.compile(r" \*\*\* Search.*\*\*\*\s*Time:\s*(\S*)")
+    version_expr = re.compile(r".*Optimizer.* v([0-9.]*) ")
+    nodes_expr = re.compile(r"^Nodes explored = (.*)$")
 
 
     # TODO does this work? Benchmarks seem to be broken
@@ -924,11 +924,11 @@ class XpressSolver(Solver):
 #
 #    # TODO fix regexes to contain groups which can extract numbers, test, etc
 #    solverID = "Couenne"
-#    recognition_expr = re.compile("Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization")
-#    primalbound_expr = re.compile("^Upper bound:")
-#    dualbound_expr = re.compile("^Lower Bound:")
-#    solvingtime_expr = re.compile("^Total time:")
-#    version_expr =  re.compile(" Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization \S* (\S*)")
+#    recognition_expr = re.compile(r"Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization")
+#    primalbound_expr = re.compile(r"^Upper bound:")
+#    dualbound_expr = re.compile(r"^Lower Bound:")
+#    solvingtime_expr = re.compile(r"^Total time:")
+#    version_expr =  re.compile(r" Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization \S* (\S*)")
 #
 #    solverstatusmap = {"" : Key.SolverStatusCodes.Optimal,
 #                       "" : Key.SolverStatusCodes.Infeasible,
@@ -953,10 +953,10 @@ class MatlabSolver(Solver):
     '''Solver class for the Matlab Intlinprog solver
     '''
     solverId = "Matlab"
-    recognition_expr = re.compile(" *< M A T L A B \(R\) >")
-    primalbound_expr = re.compile("PrimalBound (\S*)")
-    dualbound_expr = re.compile("DualBound (\S*)")
-    nodes_expr = re.compile("^BBnodes (\S+)")
+    recognition_expr = re.compile(r" *< M A T L A B \(R\) >")
+    primalbound_expr = re.compile(r"PrimalBound (\S*)")
+    dualbound_expr = re.compile(r"DualBound (\S*)")
+    nodes_expr = re.compile(r"^BBnodes (\S+)")
 
     solverstatusmap = {"Intlinprog stopped.* because the objective value is within" : Key.SolverStatusCodes.Optimal,
                        "Intlinprog stopped because it exceeded the time limit" : Key.SolverStatusCodes.TimeLimit,
@@ -976,12 +976,12 @@ class MosekSolver(Solver):
     '''
 
     solverId = "Mosek"
-    recognition_expr = re.compile("MOSEK")
-    version_expr = re.compile("MOSEK Version (.*)$")
-    solvingtime_expr = re.compile("Optimizer terminated\. Time: (.*)$")
-    primalbound_expr = re.compile("^Objective of best integer solution : (.*)$")
-    dualbound_expr = re.compile("^Best objective bound               : (.*)$")
-    nodes_expr = re.compile("^Number of branches                 : (.*)$")
+    recognition_expr = re.compile(r"MOSEK")
+    version_expr = re.compile(r"MOSEK Version (.*)$")
+    solvingtime_expr = re.compile(r"Optimizer terminated\. Time: (.*)$")
+    primalbound_expr = re.compile(r"^Objective of best integer solution : (.*)$")
+    dualbound_expr = re.compile(r"^Best objective bound               : (.*)$")
+    nodes_expr = re.compile(r"^Number of branches                 : (.*)$")
 
     solverstatusmap = {"^  Solution status : .*OPTIMAL" : Key.SolverStatusCodes.Optimal,
                        "^  Problem status  : PRIMAL_INFEASIBLE$" : Key.SolverStatusCodes.Infeasible,
@@ -999,13 +999,13 @@ class MipclSolver(Solver):
     '''
 
     solverId = "MIPCL"
-    recognition_expr = re.compile("^MIPCL")
-    version_expr = re.compile("^MIPCL version (.*)$")
-    solvingtime_expr = re.compile("^Solution time: (.*)$")
-    dualbound_expr = re.compile("^     lower-bound: (.*)$")
-    #dualbound_expr = re.compile("^Objective value: (.*) - optimality proven")
-    primalbound_expr = re.compile("^Objective value: (\S+)")
-    nodes_expr = re.compile("Branch-and-Cut nodes: (.*)$")
+    recognition_expr = re.compile(r"^MIPCL")
+    version_expr = re.compile(r"^MIPCL version (.*)$")
+    solvingtime_expr = re.compile(r"^Solution time: (.*)$")
+    dualbound_expr = re.compile(r"^     lower-bound: (.*)$")
+    #dualbound_expr = re.compile(r"^Objective value: (.*) - optimality proven")
+    primalbound_expr = re.compile(r"^Objective value: (\S+)")
+    nodes_expr = re.compile(r"Branch-and-Cut nodes: (.*)$")
 
 
 
@@ -1016,8 +1016,8 @@ class MipclSolver(Solver):
 
     # members needed for primal bound history
     inTable = False
-    primalboundhistory_exp = re.compile("^      Time     Nodes    Leaves   Sols       Best Solution         Lower Bound     Gap%")
-    endtable = re.compile('^===========================================')
+    primalboundhistory_exp = re.compile(r"^      Time     Nodes    Leaves   Sols       Best Solution         Lower Bound     Gap%")
+    endtable = re.compile(r'^===========================================')
 
     def __init__(self, **kw):
         super(MipclSolver, self).__init__(**kw)
@@ -1065,15 +1065,15 @@ class MipclSolver(Solver):
 class NuoptSolver(Solver):
 
     solverId = "Nuopt"
-    recognition_expr = re.compile("^MSI Numerical Optimizer")
-    primalbound_expr = re.compile("^VALUE_OF_OBJECTIVE *(\S+)")
-    dualbound_expr = re.compile("^(?:Lower bound\s*|Objective value\s*):\s*(\S*)")
-    solvingtime_expr = re.compile("^ELAPSED_TIME\(sec\.\) \s*(\S+)")
-    version_expr = re.compile("^^MSI Numerical Optimizer (\S+)")
-    nodes_expr = re.compile("^PARTIAL_PROBLEM_COUNT \s*(\S+)")
-    gap_expr = re.compile("^GAP *(\S+)")
-    no_feasible_sol_expr = re.compile("^\(NUOPT 2[02]\) .* \(no feas\.sol\.\)")
-    viol_expr = re.compile("^\(NUOPT (14|34|36)\)")
+    recognition_expr = re.compile(r"^MSI Numerical Optimizer")
+    primalbound_expr = re.compile(r"^VALUE_OF_OBJECTIVE *(\S+)")
+    dualbound_expr = re.compile(r"^(?:Lower bound\s*|Objective value\s*):\s*(\S*)")
+    solvingtime_expr = re.compile(r"^ELAPSED_TIME\(sec\.\) \s*(\S+)")
+    version_expr = re.compile(r"^^MSI Numerical Optimizer (\S+)")
+    nodes_expr = re.compile(r"^PARTIAL_PROBLEM_COUNT \s*(\S+)")
+    gap_expr = re.compile(r"^GAP *(\S+)")
+    no_feasible_sol_expr = re.compile(r"^\(NUOPT 2[02]\) .* \(no feas\.sol\.\)")
+    viol_expr = re.compile(r"^\(NUOPT (14|34|36)\)")
 
     solverstatusmap = {"^STATUS *OPTIMAL" : Key.SolverStatusCodes.Optimal,
                        "^STATUS *NON_OPTIMAL" : Key.SolverStatusCodes.TimeLimit,
@@ -1121,12 +1121,12 @@ class SasSolver(Solver):
     '''
 
     solverId = "SAS"
-    recognition_expr = re.compile("^NOTE: SAS \(r\) Proprietary Software")
-    version_expr = re.compile("^NOTE: SAS \(r\) Proprietary Software (\S+)")
-    solvingtime_expr = re.compile("^ *Solution Time *(\S+)$")
-    primalbound_expr = re.compile("^ *Objective Value *(\S+)$")
-    dualbound_expr = re.compile("^ *Best Bound *(\S+)$")
-    nodes_expr = re.compile("^ *Nodes *(\S+)$")
+    recognition_expr = re.compile(r"^NOTE: SAS \(r\) Proprietary Software")
+    version_expr = re.compile(r"^NOTE: SAS \(r\) Proprietary Software (\S+)")
+    solvingtime_expr = re.compile(r"^ *Solution Time *(\S+)$")
+    primalbound_expr = re.compile(r"^ *Objective Value *(\S+)$")
+    dualbound_expr = re.compile(r"^ *Best Bound *(\S+)$")
+    nodes_expr = re.compile(r"^ *Nodes *(\S+)$")
 
     solverstatusmap = {"^ *Solution Status *(Conditionally)* Optimal" : Key.SolverStatusCodes.Optimal,
                        "^ *Solution Status *Infeasible$" : Key.SolverStatusCodes.Infeasible,
