@@ -1,0 +1,26 @@
+name: Run Tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests-server:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.11"
+          cache: 'pip'
+      - name: Install ipet
+        run: python -m pip install .
+      - name: Run tests
+        run: python -m unittest test
+      - name: Generate documentation
+        run: |
+          pip install sphinx
+          cd doc
+          make html
