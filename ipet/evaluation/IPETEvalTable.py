@@ -1863,7 +1863,7 @@ class IPETEvaluation(IpetNode):
         else:
             generalpart = df[indices].pivot_table(index = self.getColIndex(),
                     dropna = False,
-                    aggfunc = sum)
+                    aggfunc = 'sum')
 
         # test if there is any aggregation to be calculated
         activecolumns = self.getActiveColumns()
