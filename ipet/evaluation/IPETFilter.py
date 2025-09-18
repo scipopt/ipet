@@ -283,7 +283,7 @@ class IPETFilter(IpetNode):
 
     def applyValueOperator(self, df):
 
-        dtype = df.dtypes[0]
+        dtype = df.dtypes.iloc[0]
 
         self.checkAndUpdateValueSet(dtype)
         contained = df.isin(self.valueset)
