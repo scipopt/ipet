@@ -439,18 +439,17 @@ class SCIPSolver(Solver):
     shorttablecheckexp = re.compile(r's\|')
     firstsolexp = re.compile(r'^  First Solution   :')
 
-    # variables needed for dual bound history
-    regular_exp = re.compile(r'\|')  # compile the regular expression to speed up reader
+    regular_exp = re.compile('|')  # compile the regular expression to speed up reader
 
     solverstatusmap = {
         "no problem exists" : Key.SolverStatusCodes.Readerror,
-        "SCIP Status        : problem is solved \[optimal solution found\]":Key.SolverStatusCodes.Optimal,
-        "SCIP Status        : problem is solved \[infeasible\]": Key.SolverStatusCodes.Infeasible,
-        "SCIP Status        : problem is solved \[infeasible or unbounded\]": Key.SolverStatusCodes.InfOrUnbounded,
-        "SCIP Status        : solving was interrupted \[time limit reached\]" : Key.SolverStatusCodes.TimeLimit,
-        "SCIP Status        : solving was interrupted \[memory limit reached\]" : Key.SolverStatusCodes.MemoryLimit,
-        "SCIP Status        : solving was interrupted \[node limit reached\]" : Key.SolverStatusCodes.NodeLimit,
-        "SCIP Status        : solving was interrupted \[gap limit reached\]" : Key.SolverStatusCodes.GapLimit,
+        r"SCIP Status        : problem is solved \[optimal solution found\]":Key.SolverStatusCodes.Optimal,
+        r"SCIP Status        : problem is solved \[infeasible\]": Key.SolverStatusCodes.Infeasible,
+        r"SCIP Status        : problem is solved \[infeasible or unbounded\]": Key.SolverStatusCodes.InfOrUnbounded,
+        r"SCIP Status        : solving was interrupted \[time limit reached\]" : Key.SolverStatusCodes.TimeLimit,
+        r"SCIP Status        : solving was interrupted \[memory limit reached\]" : Key.SolverStatusCodes.MemoryLimit,
+        r"SCIP Status        : solving was interrupted \[node limit reached\]" : Key.SolverStatusCodes.NodeLimit,
+        r"SCIP Status        : solving was interrupted \[gap limit reached\]" : Key.SolverStatusCodes.GapLimit,
         "SCIP Status        : solving was interrupted" : Key.SolverStatusCodes.Interrupted,
     }
 
@@ -585,7 +584,7 @@ class FiberSCIPSolver(SCIPSolver):
 
     solverstatusmap = {
         "SCIP Status        : problem is solved" : Key.SolverStatusCodes.Optimal,
-        "SCIP Status        : solving was interrupted \[ hard time limit reached \]" : Key.SolverStatusCodes.TimeLimit,
+        r"SCIP Status        : solving was interrupted \[ hard time limit reached \]" : Key.SolverStatusCodes.TimeLimit,
     }
 
     def __init__(self, **kw):
@@ -635,13 +634,11 @@ class GurobiSolver(Solver):
     version_expr = re.compile(r"Gurobi Optimizer version (\S+)")
     nodes_expr = re.compile(r"Explored (\d+) nodes")
 
-    solverstatusmap = {"(Optimal solution found|Solved with barrier|Solved in \d+ iterations)" : Key.SolverStatusCodes.Optimal,
+    solverstatusmap = {r"(Optimal solution found|Solved with barrier|Solved in \d+ iterations)" : Key.SolverStatusCodes.Optimal,
                        "Model is infeasible$" : Key.SolverStatusCodes.Infeasible,
                        "Model is infeasible or unbounded" : Key.SolverStatusCodes.InfOrUnbounded,
                         "Time limit reached" : Key.SolverStatusCodes.TimeLimit,
                         "^(ERROR 10001|Out of memory)" : Key.SolverStatusCodes.MemoryLimit,
-#                       "" : Key.SolverStatusCodes.NodeLimit,
-#                       "" : Key.SolverStatusCodes.Interrupted
                         "^ERROR 10003" : Key.SolverStatusCodes.Readerror,
                         "^Model is unbounded" : Key.SolverStatusCodes.Unbounded,
                        }
@@ -729,15 +726,12 @@ class CplexSolver(Solver):
     elapsedtime_expr = re.compile(r"^Elapsed time = .+ sec. \(.* ticks, tree = .* MB, solutions = \d+\)")
 
     solverstatusmap = {"MIP - Integer optimal" : Key.SolverStatusCodes.Optimal,
-                       "MIP - Integer infeasible\." : Key.SolverStatusCodes.Infeasible,
+                       r"MIP - Integer infeasible\." : Key.SolverStatusCodes.Infeasible,
                        "MIP - Time limit exceeded" : Key.SolverStatusCodes.TimeLimit,
                        "MIP - Integer unbounded" : Key.SolverStatusCodes.Unbounded,
                        "MIP - Integer infeasible or unbounded." : Key.SolverStatusCodes.InfOrUnbounded,
-                       "CPLEX Error  1001: Out of memory\." : Key.SolverStatusCodes.MemoryLimit,
-                       "No file read\." : Key.SolverStatusCodes.Readerror,
-
-                       #                       "" : Key.SolverStatusCodes.NodeLimit,
-                       #                       "" : Key.SolverStatusCodes.Interrupted
+                       r"CPLEX Error  1001: Out of memory\." : Key.SolverStatusCodes.MemoryLimit,
+                       r"No file read\." : Key.SolverStatusCodes.Readerror,
                        }
 
     objsensemap = {
@@ -836,10 +830,7 @@ class CbcSolver(Solver):
                        "Result - Problem proven infeasible" : Key.SolverStatusCodes.Infeasible,
                        "Problem is unbounded" : Key.SolverStatusCodes.Unbounded,
                        "Pre-processing says infeasible or unbounded" : Key.SolverStatusCodes.InfOrUnbounded,
-                       "\*\* Current model not valid" : Key.SolverStatusCodes.Readerror
-                       #                       "" : Key.SolverStatusCodes.MemoryLimit,
-                       #                       "" : Key.SolverStatusCodes.NodeLimit,
-                       #                       "" : Key.SolverStatusCodes.Interrupted
+                       r"\*\* Current model not valid" : Key.SolverStatusCodes.Readerror
                        }
 
     def __init__(self, **kw):
@@ -864,14 +855,13 @@ class XpressSolver(Solver):
 
 
     # TODO does this work? Benchmarks seem to be broken
-    solverstatusmap = {r"Best integer solution found" : Key.SolverStatusCodes.Optimal,
+    solverstatusmap = {"Best integer solution found" : Key.SolverStatusCodes.Optimal,
                        "Problem is integer infeasible" : Key.SolverStatusCodes.Infeasible,
                        "Problem is unbounded" : Key.SolverStatusCodes.Unbounded,
                        "STOPPING - MAXTIME limit reached" : Key.SolverStatusCodes.TimeLimit,
-                       "\?(45|20)" : Key.SolverStatusCodes.MemoryLimit,
-                       #                       "" : Key.SolverStatusCodes.NodeLimit,
+                       r"\?(45|20)" : Key.SolverStatusCodes.MemoryLimit,
                        r" \*\*\* Search unfinished \*\*\*" : Key.SolverStatusCodes.Interrupted,
-                      r"\?(66|1038|1039)" : Key.SolverStatusCodes.Readerror
+                       r"\?(66|1038|1039)" : Key.SolverStatusCodes.Readerror
                        }
 
     objsensemap = {
@@ -890,9 +880,9 @@ class XpressSolver(Solver):
         """
         if "BestSoln" in line:
             self.xpresscutidx = line.index("BestSoln") + len("BestSoln")
-        elif re.search("^[a-zA-Z*](\d| )", line):
+        elif re.search(r"^[a-zA-Z*](\d| )", line):
             self.readBoundAndTime(line, -1, -1, cutidx = self.xpresscutidx)
-        elif line.startswith(" \*\*\* Heuristic solution found: "):
+        elif line.startswith(" *** Heuristic solution found: "):
             self.readBoundAndTime(line, -4, -2)
 
     def extractStatus(self, line:str):
@@ -919,35 +909,6 @@ class XpressSolver(Solver):
                 db = min(db, pb)
 
             self.addData(Key.DualBound, db)
-
-# class CouenneSolver(Solver):
-#
-#    # TODO fix regexes to contain groups which can extract numbers, test, etc
-#    solverID = "Couenne"
-#    recognition_expr = re.compile(r"Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization")
-#    primalbound_expr = re.compile(r"^Upper bound:")
-#    dualbound_expr = re.compile(r"^Lower Bound:")
-#    solvingtime_expr = re.compile(r"^Total time:")
-#    version_expr =  re.compile(r" Couenne  --  an Open-Source solver for Mixed Integer Nonlinear Optimization \S* (\S*)")
-#
-#    solverstatusmap = {"" : Key.SolverStatusCodes.Optimal,
-#                       "" : Key.SolverStatusCodes.Infeasible,
-#                       "" : Key.SolverStatusCodes.TimeLimit,
-#                       "" : Key.SolverStatusCodes.MemoryLimit,
-#                       "" : Key.SolverStatusCodes.NodeLimit,
-#                       "" : Key.SolverStatusCodes.Interrupted
-#                       }
-#
-#    def __init__(self, **kw):
-#        super(CouenneSolver, self).__init__(**kw)
-#
-#    def extractPrimalboundHistory(self, line : str):
-#        """ Extract the sequence of primal bounds
-#        """
-#        if "Integer solution of " in line:
-#            self.readBoundAndTime(line, 4, -2, timestripchars="(")
-#        return None
-
 
 class MatlabSolver(Solver):
     '''Solver class for the Matlab Intlinprog solver
@@ -987,8 +948,8 @@ class MosekSolver(Solver):
                        "^  Problem status  : PRIMAL_INFEASIBLE$" : Key.SolverStatusCodes.Infeasible,
                        "^(  Problem status  : UNKNOWN|  Solution status : PRIMAL_FEASIBLE)" : Key.SolverStatusCodes.TimeLimit,
                        "^  Problem status  : PRIMAL_INFEASIBLE_OR_UNBOUNDED" : Key.SolverStatusCodes.InfOrUnbounded,
-                       "^mosek.Error: \(1101\)" : Key.SolverStatusCodes.Readerror,
-                       "^mosek.Error: \(1051\)" : Key.SolverStatusCodes.MemoryLimit
+                       r"^mosek.Error: \(1101\)" : Key.SolverStatusCodes.Readerror,
+                       r"^mosek.Error: \(1051\)" : Key.SolverStatusCodes.MemoryLimit
                        }
 
     def __init__(self, **kw):
@@ -1077,11 +1038,9 @@ class NuoptSolver(Solver):
 
     solverstatusmap = {"^STATUS *OPTIMAL" : Key.SolverStatusCodes.Optimal,
                        "^STATUS *NON_OPTIMAL" : Key.SolverStatusCodes.TimeLimit,
-                       "^\(NUOPT 16\) Infeasible MIP" : Key.SolverStatusCodes.Infeasible,
-                       "^__STDIN__:\d+: \(MPS FILE \d+\)" : Key.SolverStatusCodes.Readerror,
-                       "^(\<preprocess begin\>\.+)*\(NUOPT 12\)" : Key.SolverStatusCodes.MemoryLimit,
-                       #                       "" : Key.SolverStatusCodes.NodeLimit,
-                       #                       "" : Key.SolverStatusCodes.Interrupted
+                       r"^\(NUOPT 16\) Infeasible MIP" : Key.SolverStatusCodes.Infeasible,
+                       r"^__STDIN__:\d+: \(MPS FILE \d+\)" : Key.SolverStatusCodes.Readerror,
+                       r"^(\<preprocess begin\>\.+)*\(NUOPT 12\)" : Key.SolverStatusCodes.MemoryLimit,
                        }
 
     def __init__(self, **kw):
@@ -1132,7 +1091,7 @@ class SasSolver(Solver):
                        "^ *Solution Status *Infeasible$" : Key.SolverStatusCodes.Infeasible,
                        "^ *Solution Status *Time Limit Reached" : Key.SolverStatusCodes.TimeLimit,
                        "^ *Solution Status *Infeasible or Unbounded" : Key.SolverStatusCodes.InfOrUnbounded,
-                       "^ERROR: The MPS file is incomplete\." : Key.SolverStatusCodes.Readerror,
+                       r"^ERROR: The MPS file is incomplete\." : Key.SolverStatusCodes.Readerror,
                        "^ *Solution Status *Out of Memory" : Key.SolverStatusCodes.MemoryLimit
                        }
 

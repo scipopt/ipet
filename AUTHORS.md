@@ -1,11 +1,14 @@
-### Authors ###
+### Authors
 
-Gregor Hendel, Zuse Institute Berlin, hendel@zib.de
+IPET was initially developed at [Zuse Institute Berlin](https://www.zib.de/) by:
 
-Franziska Schlösser, Zuse Institute Berlin, schloesser@zib.de
+- Gregor Hendel, Zuse Institute Berlin, hendel@zib.de
+- Franziska Schlösser, Zuse Institute Berlin, schloesser@zib.de
 
-### Acknowledgments ###
+### Maintainers
 
-Thanks to Leona Gottwald, Cristina Munoz, Stephen J. Maher, Thomas Nagel
-for contributing to the project with code, helpful suggestions, and 
-troubleshooting.
+IPET is currently being maintained by Stephen Maher, Stefan Vigerske and Cristina Muñoz with financial sponsorship from [GAMS](https://www.gams.com/).
+
+### Acknowledgments
+
+Thanks to Leona Gottwald and Thomas Nagel for contributing to the project with code, helpful suggestions, and troubleshooting.

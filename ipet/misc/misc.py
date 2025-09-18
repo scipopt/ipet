@@ -108,7 +108,7 @@ def floatPrint(number, digitsbef=16, digitsafter=9, dispchar='g'):
         return formatstring % (number)
 
 def getTexName(name):
-    return name.replace('_', '\_')
+    return name.replace('_', r'\_')
 
 def getCplexGap(value, referencevalue):
     return getGap(value, referencevalue, True)
