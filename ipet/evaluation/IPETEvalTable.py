@@ -29,6 +29,11 @@ import sys
 
 logger = logging.getLogger(__name__)
 
+def to_numeric_wrapper(s):
+  try:
+     return pd.to_numeric(s, errors='raise')
+  except ValueError:
+     return s
 
 class IPETEvaluationColumn(IpetNode):
 
@@ -1809,11 +1814,11 @@ class IPETEvaluation(IpetNode):
         self.rettab = ret
 
         # cast all numeric columns back
-        self.rettab = self.rettab.apply(pd.to_numeric, errors = 'ignore')
-        self.retagg = self.retagg.apply(pd.to_numeric, errors = 'ignore')
+        self.rettab = self.rettab.apply(to_numeric_wrapper)
+        self.retagg = self.retagg.apply(to_numeric_wrapper)
         for d in [self.filtered_agg, self.filtered_instancewise]:
             for k, v in d.items():
-                d[k] = v.apply(pd.to_numeric, errors = 'ignore')
+                d[k] = v.apply(to_numeric_wrapper)
 
         self.setEvaluated(True)
         return self.rettab, self.retagg
