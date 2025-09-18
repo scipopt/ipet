@@ -1107,8 +1107,9 @@ class IPETEvaluation(IpetNode):
             raise AttributeError("Index not unique, cannot fill in data. Exiting.")
         newdata = data.set_index(self.getIndex()).reindex(newind).reset_index()
 
-        newdata["_miss_"].fillna(value=True, inplace=True)
-        newdata[Key.ProblemStatus].fillna(Key.ProblemStatusCodes.Missing, inplace=True)
+        with pd.option_context("future.no_silent_downcasting", True):
+            newdata["_miss_"] = newdata["_miss_"].fillna(value=True).infer_objects(copy=False)
+        newdata[Key.ProblemStatus] = newdata[Key.ProblemStatus].fillna(Key.ProblemStatusCodes.Missing)
 
         return newdata
 
