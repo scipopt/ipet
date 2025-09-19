@@ -1031,7 +1031,7 @@ class IPETEvaluation(IpetNode):
 
                     newvals = tmpgroup[comparecolname]
 
-                    df[comparecolname].update(newvals)
+                    df[comparecolname] = df[comparecolname].update(newvals)
 
                 df.reset_index(drop = False, inplace = True)
                 usercolumns.append(comparecolname)
