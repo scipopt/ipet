@@ -1031,7 +1031,10 @@ class IPETEvaluation(IpetNode):
 
                     newvals = tmpgroup[comparecolname]
 
-                    df[comparecolname] = df[comparecolname].update(newvals)
+                    # we are updating the values of comparecolname in df with
+                    # newvals. This is possible because newvals has the column
+                    # name comparecolname.
+                    df.update(newvals)
 
                 df.reset_index(drop = False, inplace = True)
                 usercolumns.append(comparecolname)
