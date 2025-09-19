@@ -1008,6 +1008,9 @@ class IPETEvaluation(IpetNode):
                 compcol = dict(list(grouped))[dg]
                 comparecolname = col.getCompareColName()
 
+                logger.warning(f'{comparecolname}')
+                logger.warning(f'compare column: {col}')
+                logger.warning(f'dataframe {df[comparecolname]}')
                 # apply the correct comparison method to the original and the temporary column
                 compmethod = col.getCompareMethod()
                 method = lambda x:compmethod(*x)
