@@ -283,7 +283,7 @@ class IPETFilter(IpetNode):
 
     def applyValueOperator(self, df):
 
-        dtype = df.dtypes[0]
+        dtype = df.dtypes.iloc[0]
 
         self.checkAndUpdateValueSet(dtype)
         contained = df.isin(self.valueset)
@@ -625,8 +625,9 @@ class IPETFilterGroup(IpetNode):
         dfindex = df.set_index(index).index
 
         groups = df.groupby(index)
-        instancecount = groups.apply(len).max()
-        interrows = groups.apply(lambda x:len(x) == instancecount)
+        instancecount = groups.apply(len, include_groups=False).max()
+        interrows = groups.apply(lambda x:len(x) == instancecount,
+                                 include_groups=False)
 
         return interrows.reindex(dfindex)
 

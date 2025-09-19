@@ -29,6 +29,11 @@ import sys
 
 logger = logging.getLogger(__name__)
 
+def to_numeric_wrapper(s):
+  try:
+     return pd.to_numeric(s, errors='raise')
+  except ValueError:
+     return s
 
 class IPETEvaluationColumn(IpetNode):
 
@@ -1026,7 +1031,10 @@ class IPETEvaluation(IpetNode):
 
                     newvals = tmpgroup[comparecolname]
 
-                    df[comparecolname].update(newvals)
+                    # we are updating the values of comparecolname in df with
+                    # newvals. This is possible because newvals has the column
+                    # name comparecolname.
+                    df.update(newvals)
 
                 df.reset_index(drop = False, inplace = True)
                 usercolumns.append(comparecolname)
@@ -1102,8 +1110,9 @@ class IPETEvaluation(IpetNode):
             raise AttributeError("Index not unique, cannot fill in data. Exiting.")
         newdata = data.set_index(self.getIndex()).reindex(newind).reset_index()
 
-        newdata["_miss_"].fillna(value=True, inplace=True)
-        newdata[Key.ProblemStatus].fillna(Key.ProblemStatusCodes.Missing, inplace=True)
+        with pd.option_context("future.no_silent_downcasting", True):
+            newdata["_miss_"] = newdata["_miss_"].fillna(value=True).infer_objects(copy=False)
+        newdata[Key.ProblemStatus] = newdata[Key.ProblemStatus].fillna(Key.ProblemStatusCodes.Missing)
 
         return newdata
 
@@ -1809,11 +1818,11 @@ class IPETEvaluation(IpetNode):
         self.rettab = ret
 
         # cast all numeric columns back
-        self.rettab = self.rettab.apply(pd.to_numeric, errors = 'ignore')
-        self.retagg = self.retagg.apply(pd.to_numeric, errors = 'ignore')
+        self.rettab = self.rettab.apply(to_numeric_wrapper)
+        self.retagg = self.retagg.apply(to_numeric_wrapper)
         for d in [self.filtered_agg, self.filtered_instancewise]:
             for k, v in d.items():
-                d[k] = v.apply(pd.to_numeric, errors = 'ignore')
+                d[k] = v.apply(to_numeric_wrapper)
 
         self.setEvaluated(True)
         return self.rettab, self.retagg
@@ -1858,7 +1867,7 @@ class IPETEvaluation(IpetNode):
         else:
             generalpart = df[indices].pivot_table(index = self.getColIndex(),
                     dropna = False,
-                    aggfunc = sum)
+                    aggfunc = 'sum')
 
         # test if there is any aggregation to be calculated
         activecolumns = self.getActiveColumns()
