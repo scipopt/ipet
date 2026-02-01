@@ -79,7 +79,7 @@ validation_doc = """
     the solu file from the working directory.
 """
 
-output_doc = """
+output_doc = r"""
 
     Output control
     --------------
