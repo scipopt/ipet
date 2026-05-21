@@ -117,6 +117,7 @@ def process_one_outfiles_group(task : tuple):
     outfiles, arguments = task
     experiment = setup_experiment(arguments)
 
+    logger = logging.getLogger()
     logger.info("Start parsing process of outfile(s) {}".format(", ".join(outfiles)))
 
     for o in outfiles:
