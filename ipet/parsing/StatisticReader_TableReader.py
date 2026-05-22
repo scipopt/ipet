@@ -96,8 +96,11 @@ class TableReader(StatisticReader):
             else:
                 # treat vectors (tables with only one data column)
                 datakeys = ['_'.join((self.tableid, rowname))]
-                # TODO This works, why is eclipse complaining?
-                data = [self.convertToFloat(misc.numericExpression.search(line, colonidx + 1).group(0))]
+                finding = misc.numericExpression.search(line, colonidx + 1)
+                if finding is not None:
+                    data = [self.convertToFloat(finding.group(0))]
+                else :
+                    data = []
 
             # determine minimum length (necessary if more headers were recognized than actual available data)
             minlen = min(len(datakeys), len(data))
