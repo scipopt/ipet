@@ -17,5 +17,5 @@ from .StatisticReader_CustomHistoryReader import CustomHistoryReader
 from .StatisticReader_TableReader import TableReader, CustomTableReader
 from .StatisticReader import StatisticReader, ErrorFileReader, GapReader, TimeLimitReader, \
     BestSolInfeasibleReader, MaxDepthReader, MetaDataReader, ObjlimitReader, NodesReader, RootNodeFixingsReader, \
-    SettingsFileReader, TimeToFirstReader, TimeToBestReader, ListReader, ObjsenseReader, DateTimeReader
+    SettingsFileReader, TimeToFirstReader, TimeToBestReader, NormalizedTimeReader, ListReader, ObjsenseReader, DateTimeReader
 __all__ = []
