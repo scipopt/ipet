@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<Evaluation index="auto">
+	<Column origcolname="NormalizedTime" minval="0.5" name="NormTime" comp="quot shift. by 1">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1.0"/>
+	</Column>
+	<Column origcolname="Status" reduction="getBestStatus"/>
+	<Column origcolname="perf:cpu-cycles:u" minval="1" name="CyclesU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:cpu-cycles:k" minval="1" name="CyclesK" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:instructions:u" minval="1" name="InstrU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:instructions:k" minval="1" name="InstrK" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:cache-references:u" minval="1" name="CacheRefU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:cache-misses:u" minval="1" name="CacheMissU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:branch-instructions:u" minval="1" name="BranchInstrU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:branch-misses:u" minval="1" name="BranchMissU" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:minor-faults:u" minval="0" name="MinorFaultU">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<Column origcolname="perf:minor-faults:k" minval="0" name="MinorFaultK">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<Column origcolname="perf:major-faults:u" minval="0" name="MajorFaultU">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<Column origcolname="perf:major-faults:k" minval="0" name="MajorFaultK">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<Column origcolname="perf:context-switches" minval="0" name="ContextSwitch">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<Column origcolname="perf:cycle_activity.cycles_mem_any" minval="1" name="CycleMemAny" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:cycle_activity.stalls_mem_any" minval="1" name="StallMemAny" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:cycle_activity.stalls_total" minval="1" name="StallTotal" comp="quot shift. by 1000">
+		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
+	</Column>
+	<Column origcolname="perf:task-clock" minval="1" name="TaskClock">
+		<Aggregation aggregation="mean" name="mean"/>
+	</Column>
+	<FilterGroup name="all"/>
+	<FilterGroup name="alloptimal">
+		<Filter anytestrun="all" expression1="_solved_" expression2="1" operator="eq"/>
+	</FilterGroup>
+</Evaluation>
