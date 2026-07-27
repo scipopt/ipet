@@ -428,23 +428,26 @@ class TimeToFirstReader(StatisticReader):
             except TypeError:
                 pass
 
-class NormalizedTimeReader(StatisticReader):
+class PerfDataReader(StatisticReader):
     """
-    reads the normalized solution time
+    reads the perf statistics, like normalized solution time
     """
-    name = 'NormalizedTimeReader'
-    regular_exp = re.compile(r'^@10 .*normtime=([0-9\.]*)$')
-    datakey = Key.NormalizedTime
+    name = 'PerfDataReader'
+    normtimeexpr = re.compile(r'^@10 .*normtime=([0-9\.]*)$')
+    normtimekey = Key.NormalizedTime
     datatype = float
 
+    key2expr = {normtimekey : normtimeexpr}
+
     def extractStatistic(self, line):
-        m = self.regular_exp.match(line)
-        if m:
-            try:
-               normtime = float(m.group(1))
-               self.addData(self.datakey, normtime)
-            except TypeError:
-                pass
+        for key, regexpr in list(self.key2expr.items()):
+            m = regexpr.match(line)
+            if m:
+                try:
+                    value = float(m.group(1))
+                    self.addData(key, value)
+                except TypeError:
+                    pass
 
 class ListReader(StatisticReader):
     """
