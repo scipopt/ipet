@@ -433,18 +433,17 @@ class PerfDataReader(StatisticReader):
     reads the perf statistics, like normalized solution time
     """
     name = 'PerfDataReader'
-    normtimeexpr = re.compile(r'^@10 .*normtime=([0-9\.]*)$')
-    normtimekey = Key.NormalizedTime
     datatype = float
-
-    key2expr = {normtimekey : normtimeexpr}
+    regular_expr = re.compile(r'^@10 meanfreq=([0-9\.]*) nmsfreq=([0-9\.]*) normtime=([0-9\.]*)$')
+    keys = [Key.MeanFreq, Key.NormalizedFreq, Key.NormalizedTime]
 
     def extractStatistic(self, line):
-        for key, regexpr in list(self.key2expr.items()):
-            m = regexpr.match(line)
-            if m:
+        m = self.regular_expr.match(line)
+        if m:
+            for keyidx in range(len(self.keys)):
                 try:
-                    value = float(m.group(1))
+                    key = self.keys[keyidx]
+                    value = float(m.group(keyidx+1))
                     self.addData(key, value)
                 except TypeError:
                     pass
