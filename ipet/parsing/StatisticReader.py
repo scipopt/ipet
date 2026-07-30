@@ -428,6 +428,47 @@ class TimeToFirstReader(StatisticReader):
             except TypeError:
                 pass
 
+class PerfDataReader(StatisticReader):
+    """
+    reads the processed perf statistics, like normalized solution time
+    """
+    name = 'PerfDataReader'
+    datatype = float
+    regular_expr = re.compile(r'^@10 meanfreq=([0-9\.]*) nmsfreq=([0-9\.]*) normtime=([0-9\.]*)$')
+    keys = [Key.MeanFreq, Key.NormalizedFreq, Key.NormalizedTime]
+
+    def extractStatistic(self, line):
+        m = self.regular_expr.match(line)
+        if m:
+            for keyidx in range(len(self.keys)):
+                try:
+                    key = self.keys[keyidx]
+                    value = float(m.group(keyidx+1))
+                    self.addData(key, value)
+                except TypeError:
+                    pass
+
+class RawPerfDataReader(StatisticReader):
+    """
+    reads the raw perf statistics, e.g., @06 cpu-cycles:u=13572052343862 cpu-cycles:k=68612735800 instructions:u=25079950435035 instructions:k=54294963792 cache-references:u=610557529359 cache-misses:u=320070506935 branch-instructions:u=3638145957323 branch-misses:u=36667745269 L1-dcache-loads=9147033741310 L1-dcache-load-misses=756723588525 L1-icache-load-misses=730865048 dTLB-loads=9147044559864 dTLB-load-misses=3092490807 iTLB-load-misses=4470770 minor-faults:u=10452738 minor-faults:k=86 major-faults:u=8 major-faults:k=0 context-switches=3217 cpu-migrations=94 cycle_activity.cycles_mem_any=13078074806121 cycle_activity.stalls_mem_any=4772553217683 cycle_activity.stalls_total=5226003573246 task-clock=7223006.36
+    """
+    name = 'RawPerfDataReader'
+    datatype = int
+    raw_regular_expr = re.compile(r'^@06 (.*)')
+
+    def extractStatistic(self, line):
+        m = self.raw_regular_expr.match(line)
+        if m:
+            for keyval in m.group(1).split() :
+                keyval = keyval.strip().split('=')
+                if len(keyval) == 2:
+                    try:
+                        key = 'perf:' + keyval[0].replace('_','-').replace('.','-')
+                        value = int(float(keyval[1]))
+                        self.addData(key, value)
+                    except TypeError:
+                        pass
+
 class ListReader(StatisticReader):
     """
     reads a list matching a regular expression
