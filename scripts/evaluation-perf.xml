@@ -43,13 +43,13 @@
 	<Column origcolname="perf:context-switches" minval="0" name="ContextSwitch">
 		<Aggregation aggregation="mean" name="mean"/>
 	</Column>
-	<Column origcolname="perf:cycle_activity.cycles_mem_any" minval="1" name="CycleMemAny" comp="quot shift. by 1000">
+	<Column origcolname="perf:cycle-activity-cycles-mem-any" minval="1" name="CycleMemAny" comp="quot shift. by 1000">
 		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
 	</Column>
-	<Column origcolname="perf:cycle_activity.stalls_mem_any" minval="1" name="StallMemAny" comp="quot shift. by 1000">
+	<Column origcolname="perf:cycle-activity-stalls-mem-any" minval="1" name="StallMemAny" comp="quot shift. by 1000">
 		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
 	</Column>
-	<Column origcolname="perf:cycle_activity.stalls_total" minval="1" name="StallTotal" comp="quot shift. by 1000">
+	<Column origcolname="perf:cycle-activity-stalls-total" minval="1" name="StallTotal" comp="quot shift. by 1000">
 		<Aggregation aggregation="shmean" name="shmean" shiftby="1000.0"/>
 	</Column>
 	<Column origcolname="perf:task-clock" minval="1" name="TaskClock">

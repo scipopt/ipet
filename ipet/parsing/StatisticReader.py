@@ -463,8 +463,9 @@ class RawPerfDataReader(StatisticReader):
                 keyval = keyval.strip().split('=')
                 if len(keyval) == 2:
                     try:
+                        key = 'perf:' + keyval[0].replace('_','-').replace('.','-')
                         value = int(float(keyval[1]))
-                        self.addData('perf:' + keyval[0], value)
+                        self.addData(key, value)
                     except TypeError:
                         pass
 
