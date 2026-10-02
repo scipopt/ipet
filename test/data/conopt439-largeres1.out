@@ -1,0 +1,38 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'largeres.opt'.
+ 
+ ** Function value overflow in the initial point.
+ 
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 13 NO SOLUTION
+ Solver Status                13 ERROR SYSTEM FAILURE
+ Iteration Count              0
+ Objective Value              0.000000000000E+00
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+ 
+ Memory: Max used =      0.00 Mbytes
+  Total Allocated =      0.00 Mbytes
+ 
+
+CONOPT has finished Optimizing
+Model status    =       13
+Solver status   =       13
+Iteration count =        0
+Objective value =   0.000000
+After solving. COI_Error =400

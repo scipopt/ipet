@@ -1,0 +1,307 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'pindyck.opt'.
+ 
+    The user model has 97 constraints and 112 variables
+    with 332 Jacobian elements, 80 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          2.3689109220E+03 (Input point)
+ 
+    The post-triangular part of the model has 33 constraints and 32 variables.
+    There are 16 definitional constraints and defined variables.
+ 
+    Preprocessed model has 48 constraints and 64 variables
+    with 194 Jacobian elements, 89 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      1.5633022645E+01 (Full preprocessed model)
+                      2.0750526564E+00 (After scaling)
+                      6.9212073228E-02 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =    1112.18591481
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       6   4          1.1704862854E+03 1.4E-07      16 1.0E+00     1 F  T
+       7   4          1.1704862854E+03 5.7E-08      16
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        7
+Objective value = 1170.486285
+Saving primal solution and status information for T = 16
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              7
+ Objective Value              1.170486285436E+03
+ 
+ CONOPT time Total                       6.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  1.000E-03 =1.7E+01%
+ 
+ Memory: Max used =      0.18 Mbytes
+  Total Allocated =      0.24 Mbytes
+ 
+After solving. COI_Error =0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'pindyck.opt'.
+ 
+    The user model has 103 constraints and 119 variables
+    with 353 Jacobian elements, 85 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          4.9005632973E+01 (Input point)
+ 
+    The post-triangular part of the model has 35 constraints and 34 variables.
+    There are 17 definitional constraints and defined variables.
+ 
+    Preprocessed model has 51 constraints and 68 variables
+    with 210 Jacobian elements, 98 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      1.1245613434E+00 (Full preprocessed model)
+                      1.4057016793E-01 (After scaling)
+                      1.7108358505E-02 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =    1208.83953893
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       6   4          1.2258643407E+03 5.7E-05      17 1.0E+00     4 F  T
+       8   4          1.2258643407E+03 2.6E-08      17
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        8
+Objective value = 1225.864341
+Saving primal solution and status information for T = 17
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              8
+ Objective Value              1.225864340738E+03
+ 
+ CONOPT time Total                       3.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  1.000E-03 =3.3E+01%
+ 
+ Memory: Max used =      0.18 Mbytes
+  Total Allocated =      0.23 Mbytes
+ 
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'pindyck.opt'.
+ 
+    The user model has 109 constraints and 126 variables
+    with 374 Jacobian elements, 90 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          5.0522721440E+01 (Input point)
+ 
+    The post-triangular part of the model has 37 constraints and 36 variables.
+    There are 18 definitional constraints and defined variables.
+ 
+    Preprocessed model has 54 constraints and 72 variables
+    with 227 Jacobian elements, 109 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      1.1400190443E+00 (Full preprocessed model)
+                      1.4250238054E-01 (After scaling)
+                      1.7092765527E-02 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =    1264.43892645
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       6   4          1.2802843540E+03 1.9E-05      18 1.0E+00     4 F  T
+       7   4          1.2802843540E+03 6.6E-08      18
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        7
+Objective value = 1280.284354
+Saving primal solution and status information for T = 18
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              7
+ Objective Value              1.280284354019E+03
+ 
+ CONOPT time Total                       3.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+ 
+ Memory: Max used =      0.19 Mbytes
+  Total Allocated =      0.23 Mbytes
+ 
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'pindyck.opt'.
+ 
+    The user model has 115 constraints and 133 variables
+    with 395 Jacobian elements, 95 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          5.2068736060E+01 (Input point)
+ 
+    The post-triangular part of the model has 39 constraints and 38 variables.
+    There are 19 definitional constraints and defined variables.
+ 
+    Preprocessed model has 57 constraints and 76 variables
+    with 244 Jacobian elements, 119 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      1.1555167500E+00 (Full preprocessed model)
+                      1.4443959375E-01 (After scaling)
+                      1.7076374638E-02 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =    1318.14087491
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       6   4          1.3337424507E+03 5.5E-05      19 1.0E+00     4 F  T
+       7   4          1.3337424507E+03 6.9E-08      19
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        7
+Objective value = 1333.742451
+Saving primal solution and status information for T = 19
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              7
+ Objective Value              1.333742450705E+03
+ 
+ CONOPT time Total                       3.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  1.000E-03 =3.3E+01%
+ 
+ Memory: Max used =      0.20 Mbytes
+  Total Allocated =      0.25 Mbytes
+ 
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'pindyck.opt'.
+ 
+    The user model has 121 constraints and 140 variables
+    with 416 Jacobian elements, 100 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          5.3643294976E+01 (Input point)
+ 
+    The post-triangular part of the model has 41 constraints and 40 variables.
+    There are 20 definitional constraints and defined variables.
+ 
+    Preprocessed model has 60 constraints and 80 variables
+    with 262 Jacobian elements, 131 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      1.1710525116E+00 (Full preprocessed model)
+                      1.4638156395E-01 (After scaling)
+                      1.7058937480E-02 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =    1370.88092958
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       6   4          1.3862354828E+03 7.9E-05      20 1.0E+00     5 F  T
+       7   4          1.3862354828E+03 7.1E-08      20
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        7
+Objective value = 1386.235483
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              7
+ Objective Value              1.386235482826E+03
+ 
+ CONOPT time Total                       3.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+ 
+ Memory: Max used =      0.21 Mbytes
+  Total Allocated =      0.26 Mbytes
+ 
+
+End of Pinadd Model. Return code=0

@@ -1,0 +1,60 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'const01.opt'.
+ 
+    The user model has 2 constraints and 4 variables
+    with 6 Jacobian elements, 4 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          5.0000000000E+00 (Input point)
+ 
+    The pre-triangular part of the model has 0 constraints and 3 variables.
+    The post-triangular part of the model has 2 constraints and 1 variables.
+ 
+    Preprocessed model is empty.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    15.0000000000
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.5000000000E+01 0.0E+00       0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           1
+ Solver status  =           1
+ Iteration count=           1
+ Objective value=   15.000000000000000     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 1  OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              1
+ Objective Value              1.500000000000E+01
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of const01 example. Return code=           0

@@ -1,0 +1,60 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'tutorial.opt'.
+ 
+    The user model has 3 constraints and 4 variables
+    with 9 Jacobian elements, 4 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          4.8771929825E+00 (Input point)
+ 
+    The post-triangular part of the model has 2 constraints and 1 variables.
+ 
+    Preprocessed model has 1 constraints and 3 variables
+    with 3 Jacobian elements, 2 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      8.7719298246E-01 (Full preprocessed model)
+                      8.7719298246E-01 (After scaling)
+                      0.0000000000E+00 (After adjusting individual variables)
+ 
+ ** Feasible solution. Value of objective =   0.469652200677
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   3          5.6913410976E-01 4.5E-01       2 4.2E-01     1 F  T
+       5   4          5.7294297132E-01 9.4E-10       2
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+CONOPT has finished Optimizing
+Model status    =        2
+Solver status   =        1
+Iteration count =        5
+Objective value =   0.572943
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 2  LOCALLY OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              5
+ Objective Value              5.729429718580E-01
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+After solving. COI_Error =0
