@@ -97,6 +97,7 @@ class SolverStatusCodes:
 
         - found the optimal solution
         - found, that the problem was infeasible
+        - found a locally optimal solution or a locally infeasible point (no proof of global optimality or infeasibility)
         - hit a limit of memory, time or nodes,
 
     or it could have simply been cancelled by the user
@@ -110,6 +111,8 @@ class SolverStatusCodes:
     MemoryLimit = 3
     NodeLimit = 4
     GapLimit = 5
+    LocallyOptimal = 6
+    LocallyInfeasible = 7
     Unbounded = 110
     InfOrUnbounded = 120
     Interrupted = 1000
@@ -173,6 +176,8 @@ solver2problemStatusCode = {
     SolverStatusCodes.Crashed : ProblemStatusCodes.FailAbort,
     SolverStatusCodes.Infeasible : ProblemStatusCodes.Ok,
     SolverStatusCodes.Optimal : ProblemStatusCodes.Ok,
+    SolverStatusCodes.LocallyOptimal : ProblemStatusCodes.Ok,
+    SolverStatusCodes.LocallyInfeasible : ProblemStatusCodes.Ok,
     SolverStatusCodes.Unbounded : ProblemStatusCodes.Ok,
     SolverStatusCodes.InfOrUnbounded : ProblemStatusCodes.Ok,
     SolverStatusCodes.TimeLimit : ProblemStatusCodes.TimeLimit,

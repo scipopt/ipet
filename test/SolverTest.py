@@ -5,7 +5,8 @@ Created on 04.05.2017
 '''
 import unittest
 import os
-from ipet.parsing.Solver import SCIPSolver, GurobiSolver, CplexSolver, CbcSolver, XpressSolver, MipclSolver
+from ipet.parsing.Solver import SCIPSolver, GurobiSolver, CplexSolver, CbcSolver, XpressSolver, MipclSolver, \
+    ConoptSolver
 from ipet import Key
 
 DATADIR = os.path.join(os.path.dirname(__file__), "data")
@@ -604,6 +605,71 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.MemoryLimit }, {
                     Key.PrimalBound: 1e+20,
                     Key.DualBound: 13.0} ],
+                "conopt439-tutorial" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 5,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyOptimal }, {
+                    Key.PrimalBound: 0.572942971858,
+                    Key.SolvingTime: 0.001,
+                    "MemoryMaxUsed": 0.02} ],
+                "conopt439-const01" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 1,
+                    Key.SolverStatus: Key.SolverStatusCodes.Optimal }, {
+                    Key.PrimalBound: 15.0,
+                    Key.SolvingTime: 0.001,
+                    "MemoryMaxUsed": 0.02} ],
+                "conopt439-const12" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 0,
+                    Key.SolverStatus: Key.SolverStatusCodes.Infeasible }, {
+                    Key.PrimalBound: 8.0,
+                    Key.SolvingTime: 0.0,
+                    "MemoryMaxUsed": 0.01} ],
+                # const12 with the model status changed to LOCALLY INFEASIBLE (no sample log reports it)
+                "conopt439-const12-localinf" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 0,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyInfeasible }, {
+                    Key.PrimalBound: 8.0,
+                    Key.SolvingTime: 0.0,
+                    "MemoryMaxUsed": 0.01} ],
+                "conopt439-largeres1" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 0,
+                    Key.SolverStatus: Key.SolverStatusCodes.Crashed }, {
+                    Key.PrimalBound: 0.0,
+                    Key.SolvingTime: 0.0,
+                    "MemoryMaxUsed": 0.0} ],
+                "conopt439-pinadd" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 36,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyOptimal }, {
+                    Key.PrimalBound: 1386.235482826,
+                    Key.SolvingTime: 0.018,
+                    "MemoryMaxUsed": 0.21} ],
+                "conopt439-mono07" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": 6,
+                    Key.SolverStatus: Key.SolverStatusCodes.Infeasible }, {
+                    Key.PrimalBound: 1000000000000000.0,
+                    Key.SolvingTime: 0.004,
+                    "MemoryMaxUsed": 0.02} ],
+                "conopt439-leastsq" : [ {
+                    Key.Solver: "CONOPT",
+                    Key.Version: "4.39.0",
+                    "Iterations": None,
+                    Key.SolverStatus: Key.SolverStatusCodes.Crashed }, {
+                    Key.PrimalBound: None,
+                    Key.SolvingTime: None,
+                    "MemoryMaxUsed": None} ],
                 }
 
     solvers = []
@@ -615,6 +681,7 @@ class SolverTest(unittest.TestCase):
         self.solvers.append([CbcSolver(), "CBC"])
         self.solvers.append([XpressSolver(), "XPRESS"])
         self.solvers.append([MipclSolver(), "MIPCL"])
+        self.solvers.append([ConoptSolver(), "CONOPT"])
         self.activeSolver = self.solvers[0][SOLVER]
 
     def tearDown(self):

@@ -41,7 +41,8 @@ class Solver():
     codes_nobound = set(
         [Key.SolverStatusCodes.Crashed,
          Key.SolverStatusCodes.Readerror,
-         Key.SolverStatusCodes.Infeasible]
+         Key.SolverStatusCodes.Infeasible,
+         Key.SolverStatusCodes.LocallyInfeasible]
     )
 
     def __init__(self,
@@ -1097,3 +1098,92 @@ class SasSolver(Solver):
 
     def __init__(self, **kw):
         super(SasSolver, self).__init__(**kw)
+
+class ConoptSolver(Solver):
+    '''Solver class for CONOPT
+
+    Data is read from the "Solving Statistics" block(s). If a log contains
+    several solves, status and objective are taken from the last block,
+    iterations and time are summed and memory is the maximum over all blocks.
+    '''
+
+    solverId = "CONOPT"
+    recognition_expr = re.compile(r"^\s*C O N O P T\s+version")
+    version_expr = re.compile(r"^\s*C O N O P T\s+version (\S+)")
+    primalbound_expr = re.compile(r"^ Objective Value\s+(\S+)")
+
+    statistics_expr = re.compile(r"^ Solving Statistics")
+    modelstatus_expr = re.compile(r"^ Model Status\s+(\d+)")
+    solverstatus_expr = re.compile(r"^ Solver Status\s+(\d+)")
+    iterations_expr = re.compile(r"^ Iteration Count\s+(\d+)")
+    time_expr = re.compile(r"^ CONOPT time Total\s+(\S+) seconds")
+    memmaxused_expr = re.compile(r"^ Memory: Max used =\s+(\S+) Mbytes")
+    memallocated_expr = re.compile(r"^  Total Allocated =\s+(\S+) Mbytes")
+
+    # GAMS model status codes (used if the solver status is 1, NORMAL COMPLETION)
+    modelstatusmap = {1 : Key.SolverStatusCodes.Optimal,            # OPTIMAL
+                      2 : Key.SolverStatusCodes.LocallyOptimal,     # LOCALLY OPTIMAL
+                      15 : Key.SolverStatusCodes.Optimal,           # SOLVED UNIQUE
+                      16 : Key.SolverStatusCodes.Optimal,           # SOLVED
+                      3 : Key.SolverStatusCodes.Unbounded,          # UNBOUNDED
+                      18 : Key.SolverStatusCodes.Unbounded,         # UNBOUNDED - NO SOLUTION
+                      4 : Key.SolverStatusCodes.Infeasible,         # INFEASIBLE
+                      5 : Key.SolverStatusCodes.LocallyInfeasible,  # LOCALLY INFEASIBLE
+                      19 : Key.SolverStatusCodes.Infeasible         # INFEASIBLE - NO SOLUTION
+                      }
+
+    # GAMS solver status codes, all others are treated as crashes
+    solverstatuscodemap = {2 : Key.SolverStatusCodes.NodeLimit,   # ITERATION INTERRUPT
+                           3 : Key.SolverStatusCodes.TimeLimit,   # RESOURCE INTERRUPT
+                           8 : Key.SolverStatusCodes.Interrupted  # USER INTERRUPT
+                           }
+
+    def __init__(self, **kw):
+        super(ConoptSolver, self).__init__(**kw)
+
+    def reset(self):
+        Solver.reset(self)
+        self.inStatistics = False
+        self.modelstatus = None
+
+    def readLine(self, line : str):
+        if self.statistics_expr.match(line):
+            self.inStatistics = True
+        elif self.recognition_expr.match(line):
+            self.inStatistics = False
+            self.extractVersion(line)
+        elif self.inStatistics:
+            Solver.readLine(self, line)
+
+    def extractStatus(self, line : str):
+        m = self.modelstatus_expr.match(line)
+        if m:
+            self.modelstatus = int(m.group(1))
+            return
+
+        m = self.solverstatus_expr.match(line)
+        if m:
+            solverstatus = int(m.group(1))
+            if solverstatus == 1:
+                status = self.modelstatusmap.get(self.modelstatus, Key.SolverStatusCodes.Crashed)
+            else:
+                status = self.solverstatuscodemap.get(solverstatus, Key.SolverStatusCodes.Crashed)
+            self.addData(Key.SolverStatus, status)
+
+    def addSum(self, line : str, expr, key : str, datatype : type = float):
+        m = expr.match(line)
+        if m:
+            self.addData(key, (self.getData(key) or 0) + datatype(m.group(1)))
+
+    def addMax(self, line : str, expr, key : str):
+        m = expr.match(line)
+        if m:
+            value = float(m.group(1))
+            previous = self.getData(key)
+            self.addData(key, value if previous is None else max(previous, value))
+
+    def extractOptionalInformation(self, line : str):
+        self.addSum(line, self.iterations_expr, "Iterations", int)
+        self.addSum(line, self.time_expr, Key.SolvingTime)
+        self.addMax(line, self.memmaxused_expr, "MemoryMaxUsed")
+        self.addMax(line, self.memallocated_expr, "MemoryAllocated")

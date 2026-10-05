@@ -1,0 +1,56 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'const12.opt'.
+ 
+    The user model has 2 constraints and 3 variables
+    with 5 Jacobian elements, 3 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.5108256238E+00 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 1 constraints and 3 variables.
+    The post-triangular part of the model has 1 constraints and 0 variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           4
+ Solver status  =           1
+ Iteration count=           0
+ Objective value=   8.0000000000000000     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 5  LOCALLY INFEASIBLE
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              0
+ Objective Value              8.000000000000E+00
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.01 Mbytes
+  Total Allocated =      0.01 Mbytes
+ 
+
+ End of const12 example. Return code=           0

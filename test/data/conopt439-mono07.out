@@ -1,0 +1,515 @@
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          2.5000000000E+00 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+ 
+    The pre-triangular part of the model has 1 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           4
+ Solver status  =           1
+ Iteration count=           0
+ Objective value=  -1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 4  INFEASIBLE
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              0
+ Objective Value              -1.000000000000E+15
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.01 Mbytes
+  Total Allocated =      0.01 Mbytes
+ 
+
+ End of Mono07 example case           1 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          2.5000000000E-01 (Input point)
+ 
+    The pre-triangular part of the model has 1 constraints and variables.
+ 
+    Preprocessed model is empty.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    1.09861228867
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.0986122887E+00 0.0E+00       0
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           1
+ Solver status  =           1
+ Iteration count=           1
+ Objective value=   1.0986122886681091     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 1  OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              1
+ Objective Value              1.098612288668E+00
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of Mono07 example case           2 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          6.0000000000E-01 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+ 
+    The pre-triangular part of the model has 1 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           4
+ Solver status  =           1
+ Iteration count=           0
+ Objective value=   1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 4  INFEASIBLE
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              0
+ Objective Value              1.000000000000E+15
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.01 Mbytes
+  Total Allocated =      0.01 Mbytes
+ 
+
+ End of Mono07 example case           3 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          2.5000000000E+00 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+ 
+    The pre-triangular part of the model has 1 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           4
+ Solver status  =           1
+ Iteration count=           0
+ Objective value=  -1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 4  INFEASIBLE
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              0
+ Objective Value              -1.000000000000E+15
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.01 Mbytes
+  Total Allocated =      0.01 Mbytes
+ 
+
+ End of Mono07 example case           4 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          0.0000000000E+00 (Input point)
+ 
+    The pre-triangular part of the model has 1 constraints and 0 variables.
+ 
+    Preprocessed model has no constraints and 1 variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    0.00000000000
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.0986122887E+00 1.0E+00       1 1.0E+00     1 T  T
+       2   3          1.0986122887E+00 0.0E+00       0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           1
+ Solver status  =           1
+ Iteration count=           2
+ Objective value=   1.0986122886681091     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 1  OPTIMAL
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              2
+ Objective Value              1.098612288668E+00
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of Mono07 example case           5 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          0.0000000000E+00 (Input point)
+ 
+    The pre-triangular part of the model has 1 constraints and 0 variables.
+ 
+    Preprocessed model has no constraints and 1 variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =   1.000000000000E+15
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.0000000000E+15 0.0E+00       0
+ 
+ ** Unbounded solution. A variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           3
+ Solver status  =           1
+ Iteration count=           1
+ Objective value=   1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 3  UNBOUNDED
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              1
+ Objective Value              1.000000000000E+15
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of Mono07 example case           6 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          0.0000000000E+00 (Input point)
+ 
+    The pre-triangular part of the model has 1 constraints and 0 variables.
+ 
+    Preprocessed model has no constraints and 1 variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =  -1.000000000000E+15
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.0000000000E+15 1.0E+00       1
+ 
+ ** Unbounded solution. A variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           3
+ Solver status  =           1
+ Iteration count=           1
+ Objective value=   1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 3  UNBOUNDED
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              1
+ Objective Value              1.000000000000E+15
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of Mono07 example case           7 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          2.5000000000E-01 (Input point)
+ 
+    The pre-triangular part of the model has 1 constraints and 0 variables.
+ 
+    Preprocessed model has no constraints and 1 variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    1.09861228867
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4          1.0000000000E+15 1.0E+00       1
+ 
+ ** Unbounded solution. A variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           3
+ Solver status  =           1
+ Iteration count=           1
+ Objective value=   1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 3  UNBOUNDED
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              1
+ Objective Value              1.000000000000E+15
+ 
+ CONOPT time Total                       1.000E-03 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.02 Mbytes
+  Total Allocated =      0.02 Mbytes
+ 
+
+ End of Mono07 example case           8 . Return code=           0
+
+
+    C O N O P T   version 4.39.0
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+
+    Will use up to 4 threads.
+
+ 
+ ** No valid license -- continue in small-scale demo mode.
+    Contact GAMS at sales@gams.com to purchase a license.
+ 
+ ** Cannot open option file 'Mono07.opt'.
+ 
+    The user model has 1 constraints and 1 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          6.0000000000E-01 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable has reached 'Infinity'.
+    Largest legal value (Lim_Variable) is 1.00E+15
+ 
+ 
+    The pre-triangular part of the model has 1 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+
+ CONOPT has finished optimizing.
+ Model status   =           4
+ Solver status  =           1
+ Iteration count=           0
+ Objective value=   1000000000000000.0     
+ 
+ Solving Statistics
+ ------------------
+ Model Status                 4  INFEASIBLE
+ Solver Status                1  NORMAL COMPLETION
+ Iteration Count              0
+ Objective Value              1.000000000000E+15
+ 
+ CONOPT time Total                       0.00 seconds
+   of which: Function evaluations        0.00 =0.%
+             1st Derivative evaluations  0.00 =0.%
+             Interval derivative evals   0.00 =0.%
+ 
+ Memory: Max used =      0.01 Mbytes
+  Total Allocated =      0.01 Mbytes
+ 
+
+ End of Mono07 example case           9 . Return code=           0
