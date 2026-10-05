@@ -6,7 +6,7 @@ Created on 04.05.2017
 import unittest
 import os
 from ipet.parsing.Solver import SCIPSolver, GurobiSolver, CplexSolver, CbcSolver, XpressSolver, MipclSolver, \
-    ConoptSolver
+    ConoptSolver, IpoptSolver
 from ipet import Key
 
 DATADIR = os.path.join(os.path.dirname(__file__), "data")
@@ -670,6 +670,61 @@ class SolverTest(unittest.TestCase):
                     Key.PrimalBound: None,
                     Key.SolvingTime: None,
                     "MemoryMaxUsed": None} ],
+                "ipopt31419-rosenbrock" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 10,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyOptimal }, {
+                    Key.PrimalBound: 2.026670675870003e-64,
+                    Key.SolvingTime: 0.001} ],
+                "ipopt31419-sysid" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 12,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyOptimal }, {
+                    Key.PrimalBound: 6.774576706719595e-29,
+                    Key.SolvingTime: 0.75} ],
+                "ipopt31419-biegler_10_1" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 50,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyOptimal }, {
+                    Key.PrimalBound: 9.0,
+                    Key.SolvingTime: 0.01} ],
+                # rosenbrock with the EXIT line changed (no sample log reports these statusses)
+                "ipopt31419-rosenbrock-localinf" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 10,
+                    Key.SolverStatus: Key.SolverStatusCodes.LocallyInfeasible }, {
+                    Key.PrimalBound: 2.026670675870003e-64,
+                    Key.SolvingTime: 0.001} ],
+                "ipopt31419-rosenbrock-iterlim" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 10,
+                    Key.SolverStatus: Key.SolverStatusCodes.NodeLimit }, {
+                    Key.PrimalBound: 2.026670675870003e-64,
+                    Key.SolvingTime: 0.001} ],
+                "ipopt31419-rosenbrock-restofail" : [ {
+                    Key.Solver: "Ipopt",
+                    Key.Version: "3.14.19",
+                    "LPSolver": "MUMPS",
+                    "LPSolverVersion": "5.8.2",
+                    "Iterations": 10,
+                    Key.SolverStatus: Key.SolverStatusCodes.Crashed }, {
+                    Key.PrimalBound: 2.026670675870003e-64,
+                    Key.SolvingTime: 0.001} ],
                 }
 
     solvers = []
@@ -682,6 +737,7 @@ class SolverTest(unittest.TestCase):
         self.solvers.append([XpressSolver(), "XPRESS"])
         self.solvers.append([MipclSolver(), "MIPCL"])
         self.solvers.append([ConoptSolver(), "CONOPT"])
+        self.solvers.append([IpoptSolver(), "Ipopt"])
         self.activeSolver = self.solvers[0][SOLVER]
 
     def tearDown(self):

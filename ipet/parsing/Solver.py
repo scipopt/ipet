@@ -208,6 +208,24 @@ class Solver():
         """
         self.data[key] = datum
 
+    def addSum(self, line : str, expr, key : str, datatype : type = float) -> None:
+        """Add the first group of a match of 'expr' to the datum stored under 'key'
+
+        Used to accumulate data over several solves in one log, e.g. iterations
+        """
+        m = expr.match(line)
+        if m:
+            self.addData(key, (self.getData(key) or 0) + datatype(m.group(1)))
+
+    def addMax(self, line : str, expr, key : str) -> None:
+        """Store the maximum of the first group of a match of 'expr' and the datum stored under 'key'
+        """
+        m = expr.match(line)
+        if m:
+            value = float(m.group(1))
+            previous = self.getData(key)
+            self.addData(key, value if previous is None else max(previous, value))
+
     def deleteData(self, key : str) -> bool:
         """Delete data from local data dictionary
         """
@@ -1170,20 +1188,82 @@ class ConoptSolver(Solver):
                 status = self.solverstatuscodemap.get(solverstatus, Key.SolverStatusCodes.Crashed)
             self.addData(Key.SolverStatus, status)
 
-    def addSum(self, line : str, expr, key : str, datatype : type = float):
-        m = expr.match(line)
-        if m:
-            self.addData(key, (self.getData(key) or 0) + datatype(m.group(1)))
-
-    def addMax(self, line : str, expr, key : str):
-        m = expr.match(line)
-        if m:
-            value = float(m.group(1))
-            previous = self.getData(key)
-            self.addData(key, value if previous is None else max(previous, value))
-
     def extractOptionalInformation(self, line : str):
         self.addSum(line, self.iterations_expr, "Iterations", int)
         self.addSum(line, self.time_expr, Key.SolvingTime)
         self.addMax(line, self.memmaxused_expr, "MemoryMaxUsed")
         self.addMax(line, self.memallocated_expr, "MemoryAllocated")
+
+class IpoptSolver(Solver):
+    '''Solver class for Ipopt
+
+    Each solve is read from the "This is Ipopt version" banner up to the "EXIT:" line,
+    output that follows (e.g. by CasADi) is ignored. If a log contains several solves,
+    status, objective and the final error measures are taken from the last solve,
+    iterations and time are summed.
+    '''
+
+    solverId = "Ipopt"
+    recognition_expr = re.compile(r"^This is Ipopt version")
+    version_expr = re.compile(r"^This is Ipopt version ([^\s,]+)")
+    primalbound_expr = re.compile(r"^Objective\.+:\s+\S+\s+(\S+)")
+
+    linearsolver_expr = re.compile(r"^This is Ipopt version \S+ running with linear solver (\S+?)(?: (\S+?))?\.?$")
+    iterations_expr = re.compile(r"^Number of Iterations\.+: (\d+)")
+    time_expr = re.compile(r"^Total seconds in IPOPT\s+= (\S+)")
+    exit_expr = re.compile(r"^EXIT: ")
+
+    # final (unscaled) error measures
+    errormeasures = [(re.compile(r"^Dual infeasibility\.+:\s+\S+\s+(\S+)"), "DualInfeasibility"),
+                     (re.compile(r"^Constraint violation\.+:\s+\S+\s+(\S+)"), "ConstraintViolation"),
+                     (re.compile(r"^Variable bound violation:\s+\S+\s+(\S+)"), "VariableBoundViolation"),
+                     (re.compile(r"^Complementarity\.+:\s+\S+\s+(\S+)"), "Complementarity"),
+                     (re.compile(r"^Overall NLP error\.+:\s+\S+\s+(\S+)"), "NLPError")]
+
+    # Ipopt only proves local optimality and local infeasibility, all other EXIT messages are treated as crashes
+    exitstatusses = [(re.compile(pattern), status) for pattern, status in [
+        (r"^EXIT: Optimal Solution Found\.", Key.SolverStatusCodes.LocallyOptimal),
+        (r"^EXIT: Solved To Acceptable Level\.", Key.SolverStatusCodes.LocallyOptimal),
+        (r"^EXIT: Feasible point for square problem found\.", Key.SolverStatusCodes.Optimal),
+        (r"^EXIT: Converged to a point of local infeasibility\.", Key.SolverStatusCodes.LocallyInfeasible),
+        (r"^EXIT: Iterates diverging; problem might be unbounded\.", Key.SolverStatusCodes.Unbounded),
+        (r"^EXIT: Maximum Number of Iterations Exceeded\.", Key.SolverStatusCodes.NodeLimit),
+        (r"^EXIT: Maximum (?:CPU|wallclock) time exceeded\.", Key.SolverStatusCodes.TimeLimit),
+        (r"^EXIT: Stopping optimization at current point as requested by user\.", Key.SolverStatusCodes.Interrupted),
+        (r"^EXIT: Not enough memory\.", Key.SolverStatusCodes.MemoryLimit)]]
+
+    def __init__(self, **kw):
+        super(IpoptSolver, self).__init__(**kw)
+
+    def reset(self):
+        Solver.reset(self)
+        self.inSolve = False
+
+    def readLine(self, line : str):
+        if self.recognition_expr.match(line):
+            self.inSolve = True
+        if self.inSolve:
+            Solver.readLine(self, line)
+            if self.exit_expr.match(line):
+                self.inSolve = False
+
+    def extractStatus(self, line : str):
+        if not self.exit_expr.match(line):
+            return
+        for expr, status in self.exitstatusses:
+            if expr.match(line):
+                self.addData(Key.SolverStatus, status)
+                return
+        self.addData(Key.SolverStatus, Key.SolverStatusCodes.Crashed)
+
+    def extractOptionalInformation(self, line : str):
+        # the linear solver is stored under the LP solver keys, which rubberband displays
+        m = self.linearsolver_expr.match(line)
+        if m:
+            self.addData("LPSolver", m.group(1))
+            if m.group(2) is not None:
+                self.addData("LPSolverVersion", m.group(2))
+        self.addSum(line, self.iterations_expr, "Iterations", int)
+        self.addSum(line, self.time_expr, Key.SolvingTime)
+        for expr, key in self.errormeasures:
+            self.extractByExpression(line, expr, key)

@@ -24,7 +24,7 @@ from ipet.concepts.Manager import Manager
 from ipet.concepts.IPETNode import IpetNode
 from ipet.parsing.Solver import SCIPSolver, CbcSolver, XpressSolver, GurobiSolver, \
     CplexSolver, FiberSCIPSolver, MatlabSolver, MosekSolver, MipclSolver, NuoptSolver, SasSolver, \
-    ConoptSolver
+    ConoptSolver, IpoptSolver
 from ipet.misc import misc
 # CbcSolver, CouenneSolver, \
 #     XpressSolver, GurobiSolver, CplexSolver
@@ -81,7 +81,8 @@ class ReaderManager(Manager, IpetNode):
                   MipclSolver(),
                   NuoptSolver(),
                   SasSolver(),
-                  ConoptSolver()
+                  ConoptSolver(),
+                  IpoptSolver()
                   ]:
             self.addSolver(s)
 
