@@ -643,6 +643,79 @@ class FiberSCIPSolver(SCIPSolver):
         """
         pass
 
+class SoPlexSolver(Solver):
+
+    solverId = "SoPlex"
+    recognition_expr = re.compile(r"^SoPlex version ")
+    version_expr = re.compile(r"^SoPlex version (\S+)")
+    primalbound_expr = re.compile(r"^  Objective value\s+: (\S+)")
+    dualbound_expr = re.compile(r"^  Objective value\s+: (\S+)")
+    solvingtime_expr = re.compile(r"^  Solving\s+: (\S+)")
+    violbound_expr = re.compile(r"^  Max/sum bound\s+: (\S+)")
+    viollp_expr = re.compile(r"^  Max/sum row\s+: (\S+)")
+
+    githash_expr = re.compile(r"^SoPlex version .*\[[Gg]it[Hh]ash: (\S+)\]")
+    iterations_expr = re.compile(r"^Iterations\s+: (\d+)")
+    primalfeas_expr = re.compile(r"^Primal solution (feasible|infeasible)")
+    dualfeas_expr = re.compile(r"^Dual solution (feasible|infeasible)")
+
+    solverstatusmap = {
+        r"SoPlex status\s+: problem is solved \[optimal\]" : Key.SolverStatusCodes.Optimal,
+        r"SoPlex status\s+: problem is solved \[optimal with unscaled violations\]" : Key.SolverStatusCodes.Optimal,
+        r"SoPlex status\s+: problem is solved \[infeasible\]" : Key.SolverStatusCodes.Infeasible,
+        r"SoPlex status\s+: problem is solved \[unbounded\]" : Key.SolverStatusCodes.Unbounded,
+        r"SoPlex status\s+: problem is solved \[infeasible or unbounded\]" : Key.SolverStatusCodes.InfOrUnbounded,
+        r"SoPlex status\s+: solving aborted \[time limit reached\]" : Key.SolverStatusCodes.TimeLimit,
+        r"SoPlex status\s+: solving aborted \[iteration limit reached\]" : Key.SolverStatusCodes.Interrupted,
+        r"SoPlex status\s+: solving aborted \[objective limit reached\]" : Key.SolverStatusCodes.Interrupted,
+        r"SoPlex status\s+: solving aborted \[cycling\]" : Key.SolverStatusCodes.Interrupted,
+        r"SoPlex status\s+: error " : Key.SolverStatusCodes.Crashed,
+        r"SoPlex status\s+: no problem loaded" : Key.SolverStatusCodes.Readerror,
+        r"SoPlex status\s+: unknown" : Key.SolverStatusCodes.Crashed,
+    }
+
+    objsensemap = {
+        r"^Objective sense\s+: minimize" : Key.ObjectiveSenseCode.MINIMIZE,
+        r"^Objective sense\s+: maximize" : Key.ObjectiveSenseCode.MAXIMIZE,
+    }
+
+    codes_solved = set(
+        [Key.SolverStatusCodes.Optimal,
+         Key.SolverStatusCodes.Infeasible,
+         Key.SolverStatusCodes.Unbounded]
+    )
+
+    def __init__(self, **kw):
+        super(SoPlexSolver, self).__init__(**kw)
+
+    def reset(self):
+        Solver.reset(self)
+        self.primalfeasible = None
+        self.dualfeasible = None
+
+    def extractPrimalbound(self, line : str):
+        if self.primalfeasible or self.getData(Key.SolverStatus) in self.codes_solved:
+            Solver.extractPrimalbound(self, line)
+
+    def extractDualbound(self, line : str):
+        if self.dualfeasible or self.getData(Key.SolverStatus) in self.codes_solved:
+            Solver.extractDualbound(self, line)
+
+    def extractOptionalInformation(self, line : str):
+        m = self.primalfeas_expr.match(line)
+        if m:
+            self.primalfeasible = m.groups()[0] == "feasible"
+        m = self.dualfeas_expr.match(line)
+        if m:
+            self.dualfeasible = m.groups()[0] == "feasible"
+        self.extractByExpression(line, self.githash_expr, Key.GitHash, str)
+        self.extractByExpression(line, self.iterations_expr, "Iterations", int)
+
+    def cleanupData(self):
+        if self.getData(Key.SolverStatus) in (Key.SolverStatusCodes.Crashed, Key.SolverStatusCodes.Readerror):
+            self.deleteData(Key.PrimalBound)
+            self.deleteData(Key.DualBound)
+
 class GurobiSolver(Solver):
 
     solverId = "GUROBI"

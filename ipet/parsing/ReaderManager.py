@@ -22,7 +22,7 @@ from .StatisticReader_CustomReader import CustomReader
 from .TraceFileReader import TraceFileReader
 from ipet.concepts.Manager import Manager
 from ipet.concepts.IPETNode import IpetNode
-from ipet.parsing.Solver import SCIPSolver, CbcSolver, XpressSolver, GurobiSolver, \
+from ipet.parsing.Solver import SCIPSolver, SoPlexSolver, CbcSolver, XpressSolver, GurobiSolver, \
     CplexSolver, FiberSCIPSolver, MatlabSolver, MosekSolver, MipclSolver, NuoptSolver, SasSolver, \
     ConoptSolver, IpoptSolver
 from ipet.misc import misc
@@ -71,6 +71,7 @@ class ReaderManager(Manager, IpetNode):
 
     def addSolvers(self):
         for s in [SCIPSolver(),
+                  SoPlexSolver(),
                   CbcSolver(),
                   XpressSolver(),
                   GurobiSolver(),
