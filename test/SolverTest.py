@@ -5,7 +5,7 @@ Created on 04.05.2017
 '''
 import unittest
 import os
-from ipet.parsing.Solver import SCIPSolver, GurobiSolver, CplexSolver, CbcSolver, XpressSolver, MipclSolver, \
+from ipet.parsing.Solver import SCIPSolver, SoPlexSolver, GurobiSolver, CplexSolver, CbcSolver, XpressSolver, MipclSolver, \
     ConoptSolver, IpoptSolver
 from ipet import Key
 
@@ -605,6 +605,56 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.MemoryLimit }, {
                     Key.PrimalBound: 1e+20,
                     Key.DualBound: 13.0} ],
+                "soplex800-optimal" : [ {
+                    Key.Solver: "SoPlex",
+                    Key.Version: "8.0.0",
+                    Key.GitHash: "2207cfb2",
+                    "Iterations": 1,
+                    Key.SolvingTime: 0.0,
+                    Key.ObjectiveSense: Key.ObjectiveSenseCode.MINIMIZE,
+                    Key.SolverStatus: Key.SolverStatusCodes.Optimal }, {
+                    Key.PrimalBound: 1.0,
+                    Key.DualBound: 1.0} ],
+                "soplex800-infeasible" : [ {
+                    Key.Solver: "SoPlex",
+                    Key.Version: "8.0.0",
+                    Key.GitHash: "2207cfb2",
+                    "Iterations": 0,
+                    Key.SolvingTime: 0.0,
+                    Key.ObjectiveSense: Key.ObjectiveSenseCode.MINIMIZE,
+                    Key.SolverStatus: Key.SolverStatusCodes.Infeasible }, {
+                    Key.PrimalBound: 1e+100,
+                    Key.DualBound: 1e+100} ],
+                "soplex800-unbounded" : [ {
+                    Key.Solver: "SoPlex",
+                    Key.Version: "8.0.0",
+                    Key.GitHash: "2207cfb2",
+                    "Iterations": 0,
+                    Key.SolvingTime: 0.0,
+                    Key.ObjectiveSense: Key.ObjectiveSenseCode.MINIMIZE,
+                    Key.SolverStatus: Key.SolverStatusCodes.Unbounded }, {
+                    Key.PrimalBound: -1e+100,
+                    Key.DualBound: -1e+100} ],
+                "soplex800-primalfeasible" : [ {
+                    Key.Solver: "SoPlex",
+                    Key.Version: "8.0.0",
+                    Key.GitHash: "2207cfb2",
+                    "Iterations": 1,
+                    Key.SolvingTime: 0.0,
+                    Key.ObjectiveSense: Key.ObjectiveSenseCode.MAXIMIZE,
+                    Key.SolverStatus: Key.SolverStatusCodes.Interrupted }, {
+                    Key.PrimalBound: 1.0,
+                    Key.DualBound: None} ],
+                "soplex800-dualfeasible" : [ {
+                    Key.Solver: "SoPlex",
+                    Key.Version: "8.0.0",
+                    Key.GitHash: "2207cfb2",
+                    "Iterations": 1,
+                    Key.SolvingTime: 0.0,
+                    Key.ObjectiveSense: Key.ObjectiveSenseCode.MINIMIZE,
+                    Key.SolverStatus: Key.SolverStatusCodes.Interrupted }, {
+                    Key.PrimalBound: None,
+                    Key.DualBound: 1.0} ],
                 "conopt439-tutorial" : [ {
                     Key.Solver: "CONOPT",
                     Key.Version: "4.39.0",
@@ -731,6 +781,7 @@ class SolverTest(unittest.TestCase):
 
     def setUp(self):
         self.solvers.append([SCIPSolver(), "SCIP"])
+        self.solvers.append([SoPlexSolver(), "SoPlex"])
         self.solvers.append([GurobiSolver(), "GUROBI"])
         self.solvers.append([CplexSolver(), "CPLEX"])
         self.solvers.append([CbcSolver(), "CBC"])

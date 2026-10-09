@@ -1,0 +1,122 @@
+SoPlex version 8.0.0 [mode: debug] [precision: 8 byte] [rational: GMP 6.3.0] [PaPILO: not available] [githash: 2207cfb2]
+Copyright (c) 1996-2025 Zuse Institute Berlin (ZIB)
+
+int:iterlimit = 1
+int:simplifier = 0
+
+Reading (real) LP file <dualfeasible.lp> . . .
+Reading took 0.00 seconds.
+
+LP has 2 rows 2 columns and 3 nonzeros.
+
+Equilibrium scaling LP (persistent)
+type |   time |   iters | facts |    shift | viol sum | viol num | obj value 
+  L  |    0.0 |       0 |     2 | 0.00e+00 | 3.00e+00 |        2 | 0.00000000e+00
+  L  |    0.0 |       1 |     2 | 0.00e+00 | 1.00e+00 |        2 | 1.00000000e+00
+ --- unscaling external solution
+
+SoPlex status       : solving aborted [iteration limit reached]
+Solving time (sec)  : 0.00
+Iterations          : 1
+Objective value     : 1.00000000e+00
+
+Could not check primal solution.
+Dual solution feasible in original problem (max. violation = 0.00000000e+00).
+
+Statistics
+==========
+
+SoPlex status       : solving aborted [iteration limit reached]
+Original problem    : 
+  Columns           : 2
+              boxed : 0
+        lower bound : 2
+        upper bound : 0
+               free : 0
+  Rows              : 2
+              equal : 0
+             ranged : 0
+                lhs : 2
+                rhs : 0
+               free : 0
+  Nonzeros          : 3
+         per column : 1.50000000
+            per row : 1.50000000
+           sparsity : 0.75000000
+    min. abs. value : 1.00000000
+    max. abs. value : 2.00000000
+Objective sense     : minimize
+Solution (real)     : 
+  Objective value   : 1.00000000e+00
+Violations (real)   : 
+  Max/sum bound     : - / -
+  Max/sum row       : - / -
+  Max/sum redcost   : 0.00000000e+00 / 0.00000000e+00
+  Max/sum dual      : 0.00000000e+00 / 0.00000000e+00
+Total time          : 0.00
+  Reading           : 0.00
+  Solving           : 0.00
+  Preprocessing     : 0.00
+  Simplex           : 0.00
+  Synchronization   : 0.00
+  Transformation    : 0.00
+  Rational          : 0.00
+  InitialPrecision  : 0.00
+  ExtendedPrecision : 0.00
+  BoostingStep      : 0.00
+  FpTime            : 0.00
+  Other             : 0.00
+Refinements         : 0
+  Stalling          : 0
+  Pivoting          : 0
+  Feasibility       : 0
+  Unboundedness     : 0
+Precision boosts    : 0
+  Stalling          : 0
+  Pivoting          : 0
+  Feasibility       : 0
+  Unboundedness     : 0
+Iterations          : 1
+  From scratch      : 1 (100.00%)
+  From basis        : 0 (0.00%)
+  Primal            : 0 (0.00%)
+  Dual              : 1 (100.00%)
+  Bound flips       : 0
+  Sol. polishing    : 0
+  First FP solve    : 0
+IterationsBoosted   : 0
+  From scratch      : 0
+  From basis        : 0
+  Primal            : 0
+  Dual              : 0
+  Bound flips       : 0
+  Sol. polishing    : 0
+LU factorizations   : 2
+  Factor. frequency : 0.50 iterations per factorization
+  Factor. time      : 0.00
+LU solves           : 6
+  Solve frequency   : 6.00 solves per iteration
+  Solve time        : 0.00
+Matrix-Vector ops   : 
+  Sparse    time    : 0.00
+            calls   : 0 (0.00% of iterations)
+  Full      time    : 0.00
+            calls   : 0 (0.00% of iterations)
+  Colwise   time    : 0.00
+            calls   : 0 (0.00% of iterations)
+  Unsetup   time    : 0.00
+            calls   : 1 (99.01% of iterations)
+Rat. factorizations : 0
+  Rat. factor. time : 0.00
+  Rat. solve time   : 0.00
+Rat. reconstructions: 0
+  Rat. rec. time    : 0.00
+Degeneracy          : 
+  Primal Pivots     : 0
+  Dual Pivots       : 0
+  Primal Candidates : 0
+  Dual Candidates   : 0
+  Average Primal    : 0.00
+  Average Dual      : 0.00
+Numerics            :
+  Condition Number  : 1.00000000e+00
