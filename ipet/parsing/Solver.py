@@ -648,11 +648,17 @@ class SoPlexSolver(Solver):
     solverId = "SoPlex"
     recognition_expr = re.compile(r"^SoPlex version ")
     version_expr = re.compile(r"^SoPlex version (\S+)")
+    mode_expr = re.compile(r"^SoPlex version .*\[mode: ([^\]]+)\]")
     primalbound_expr = re.compile(r"^  Objective value\s+: (\S+)")
     dualbound_expr = re.compile(r"^  Objective value\s+: (\S+)")
-    solvingtime_expr = re.compile(r"^  Solving\s+: (\S+)")
+    solvingtime_expr = re.compile(r"^Solving time \(sec\)\s+: (\S+)")
+    totalreadingtime_expr = re.compile(r"^  Reading\s+: (\S+)")
+    totalsolvingtime_expr = re.compile(r"^  Solving\s+: (\S+)")
     violbound_expr = re.compile(r"^  Max/sum bound\s+: (\S+)")
     viollp_expr = re.compile(r"^  Max/sum row\s+: (\S+)")
+    columns_expr = re.compile(r"^  Columns\s+: (\d+)")
+    rows_expr = re.compile(r"^  Rows\s+: (\d+)")
+    presolved_expr = re.compile(r"^Reduced LP has (\d+) rows (\d+) columns")
 
     githash_expr = re.compile(r"^SoPlex version .*\[[Gg]it[Hh]ash: (\S+)\]")
     iterations_expr = re.compile(r"^Iterations\s+: (\d+)")
@@ -708,8 +714,20 @@ class SoPlexSolver(Solver):
         m = self.dualfeas_expr.match(line)
         if m:
             self.dualfeasible = m.groups()[0] == "feasible"
+        self.extractByExpression(line, self.mode_expr, Key.Mode, str)
         self.extractByExpression(line, self.githash_expr, Key.GitHash, str)
         self.extractByExpression(line, self.iterations_expr, "Iterations", int)
+        self.extractByExpression(line, self.totalreadingtime_expr, "TotalTime_reading")
+        self.extractByExpression(line, self.totalsolvingtime_expr, "TotalTime_solving")
+        self.extractByExpression(line, self.columns_expr, "OriginalProblem_Vars", int)
+        self.extractByExpression(line, self.rows_expr, "OriginalProblem_InitialNCons", int)
+        m = self.presolved_expr.match(line)
+        if m:
+            self.addData("PresolvedProblem_Vars", int(m.groups()[1]))
+            self.addData("PresolvedProblem_InitialNCons", int(m.groups()[0]))
+        elif self.getData("PresolvedProblem_InitialNCons") is None and self.getData("OriginalProblem_InitialNCons") is not None:
+            self.addData("PresolvedProblem_Vars", self.getData("OriginalProblem_Vars"))
+            self.addData("PresolvedProblem_InitialNCons", self.getData("OriginalProblem_InitialNCons"))
 
     def cleanupData(self):
         if self.getData(Key.SolverStatus) in (Key.SolverStatusCodes.Crashed, Key.SolverStatusCodes.Readerror):
