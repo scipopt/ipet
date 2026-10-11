@@ -1,23 +1,22 @@
 SoPlex version 8.0.0 [mode: debug] [precision: 8 byte] [rational: GMP 6.3.0] [PaPILO: not available] [githash: 2207cfb2]
 Copyright (c) 1996-2025 Zuse Institute Berlin (ZIB)
 
-int:simplifier = 0
-
 Reading (real) LP file <optimal.lp> . . .
 Reading took 0.00 seconds.
 
 LP has 1 rows 1 columns and 1 nonzeros.
 
 Equilibrium scaling LP (persistent)
-type |   time |   iters | facts |    shift | viol sum | viol num | obj value 
-  L  |    0.0 |       0 |     2 | 0.00e+00 | 1.00e+00 |        1 | 0.00000000e+00
-  L  |    0.0 |       1 |     3 | 0.00e+00 | 0.00e+00 |        0 | 1.00000000e+00
+Simplifier removed 1 rows, 1 columns, 1 nonzeros, 1 col bounds, 0 row bounds
+Reduced LP has 0 rows 0 columns 0 nonzeros
+Simplifier removed all rows and columns
+ --- unsimplifying solution and basis
  --- unscaling external solution
  --- verifying computed solution
 
 SoPlex status       : problem is solved [optimal]
 Solving time (sec)  : 0.00
-Iterations          : 1
+Iterations          : 0
 Objective value     : 1.00000000e+00
 
 Primal solution feasible in original problem (max. violation = 0.00000000e+00).
@@ -76,11 +75,11 @@ Precision boosts    : 0
   Pivoting          : 0
   Feasibility       : 0
   Unboundedness     : 0
-Iterations          : 1
-  From scratch      : 1 (100.00%)
-  From basis        : 0 (0.00%)
-  Primal            : 0 (0.00%)
-  Dual              : 1 (100.00%)
+Iterations          : 0
+  From scratch      : 0
+  From basis        : 0
+  Primal            : 0
+  Dual              : 0
   Bound flips       : 0
   Sol. polishing    : 0
   First FP solve    : 0
@@ -91,11 +90,11 @@ IterationsBoosted   : 0
   Dual              : 0
   Bound flips       : 0
   Sol. polishing    : 0
-LU factorizations   : 3
-  Factor. frequency : 0.33 iterations per factorization
+LU factorizations   : 0
+  Factor. frequency : -
   Factor. time      : 0.00
-LU solves           : 10
-  Solve frequency   : 10.00 solves per iteration
+LU solves           : 0
+  Solve frequency   : -
   Solve time        : 0.00
 Matrix-Vector ops   : 
   Sparse    time    : 0.00
@@ -105,7 +104,7 @@ Matrix-Vector ops   :
   Colwise   time    : 0.00
             calls   : 0 (0.00% of iterations)
   Unsetup   time    : 0.00
-            calls   : 1 (99.01% of iterations)
+            calls   : 0 (0.00% of iterations)
 Rat. factorizations : 0
   Rat. factor. time : 0.00
   Rat. solve time   : 0.00
@@ -119,4 +118,4 @@ Degeneracy          :
   Average Primal    : 0.00
   Average Dual      : 0.00
 Numerics            :
-  Condition Number  : 1.00000000e+00
+  Condition Number  : 1.00000000e+100
