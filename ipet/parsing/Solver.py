@@ -192,6 +192,13 @@ class Solver():
                         break
                 assert(d is not None)
 
+                # restrict floating point value to infinity threshold range
+                if datatype is float:
+                    if d < -misc.FLOAT_INFINITY:
+                        d = -misc.FLOAT_INFINITY
+                    elif d > misc.FLOAT_INFINITY:
+                        d = misc.FLOAT_INFINITY
+
                 self.addData(key, d)
             except:
                 pass
@@ -251,6 +258,13 @@ class Solver():
             bound = float(boundstr)
         except:
             return
+
+        # restrict floating point value to infinity threshold range
+        if bound < -misc.FLOAT_INFINITY:
+            bound = -misc.FLOAT_INFINITY
+        elif bound > misc.FLOAT_INFINITY:
+            bound = misc.FLOAT_INFINITY
+
         history = self.data.setdefault(key, [])
         # only append newly found bounds
 
