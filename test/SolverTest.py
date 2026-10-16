@@ -285,8 +285,8 @@ class SolverTest(unittest.TestCase):
                     Key.Nodes: 0,
                     Key.ObjectiveSense: Key.ObjectiveSenseCode.MINIMIZE,
                     Key.SolverStatus: Key.SolverStatusCodes.Infeasible }, {
-                    Key.PrimalBound: 1e+40,
-                    Key.DualBound: 1e+40} ],
+                    Key.PrimalBound: 1e+20,
+                    Key.DualBound: 1e+20} ],
                 "xpress300103-satellites1-25" : [ {
                     Key.Solver: "XPRESS",
                     Key.Version: "30.01.03",
@@ -633,8 +633,8 @@ class SolverTest(unittest.TestCase):
                     "OriginalProblem_InitialNCons": 1,
                     "PresolvedProblem_Vars": 1,
                     "PresolvedProblem_InitialNCons": 1 }, {
-                    Key.PrimalBound: 1e+100,
-                    Key.DualBound: 1e+100} ],
+                    Key.PrimalBound: 1e+20,
+                    Key.DualBound: 1e+20} ],
                 "soplex800-unbounded" : [ {
                     Key.Solver: "SoPlex",
                     Key.Version: "8.0.0",
@@ -648,8 +648,8 @@ class SolverTest(unittest.TestCase):
                     "OriginalProblem_InitialNCons": 1,
                     "PresolvedProblem_Vars": 1,
                     "PresolvedProblem_InitialNCons": 1 }, {
-                    Key.PrimalBound: -1e+100,
-                    Key.DualBound: -1e+100} ],
+                    Key.PrimalBound: -1e+20,
+                    Key.DualBound: -1e+20} ],
                 "soplex800-primalfeasible" : [ {
                     Key.Solver: "SoPlex",
                     Key.Version: "8.0.0",
