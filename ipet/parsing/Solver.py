@@ -742,6 +742,11 @@ class SoPlexSolver(Solver):
         elif self.getData("PresolvedProblem_InitialNCons") is None and self.getData("OriginalProblem_InitialNCons") is not None:
             self.addData("PresolvedProblem_Vars", self.getData("OriginalProblem_Vars"))
             self.addData("PresolvedProblem_InitialNCons", self.getData("OriginalProblem_InitialNCons"))
+        if self.getData("OriginalProblem_MaxNCons") is None and self.getData("OriginalProblem_InitialNCons") is not None:
+            self.addData("OriginalProblem_ContVars", self.getData("OriginalProblem_Vars"))
+            self.addData("OriginalProblem_MaxNCons", self.getData("OriginalProblem_InitialNCons"))
+            self.addData("PresolvedProblem_ContVars", self.getData("PresolvedProblem_Vars"))
+            self.addData("PresolvedProblem_MaxNCons", self.getData("PresolvedProblem_InitialNCons"))
 
     def cleanupData(self):
         if self.getData(Key.SolverStatus) in (Key.SolverStatusCodes.Crashed, Key.SolverStatusCodes.Readerror):
