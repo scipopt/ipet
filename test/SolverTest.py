@@ -616,8 +616,10 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.Optimal,
                     "OriginalProblem_Vars": 1,
                     "OriginalProblem_InitialNCons": 1,
+                    "OriginalProblem_MaxNCons": 1,
                     "PresolvedProblem_Vars": 0,
-                    "PresolvedProblem_InitialNCons": 0 }, {
+                    "PresolvedProblem_InitialNCons": 0,
+                    "PresolvedProblem_MaxNCons": 0 }, {
                     Key.PrimalBound: 1.0,
                     Key.DualBound: 1.0} ],
                 "soplex800-infeasible" : [ {
@@ -631,8 +633,10 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.Infeasible,
                     "OriginalProblem_Vars": 1,
                     "OriginalProblem_InitialNCons": 1,
+                    "OriginalProblem_MaxNCons": 1,
                     "PresolvedProblem_Vars": 1,
-                    "PresolvedProblem_InitialNCons": 1 }, {
+                    "PresolvedProblem_InitialNCons": 1,
+                    "PresolvedProblem_MaxNCons": 1 }, {
                     Key.PrimalBound: 1e+20,
                     Key.DualBound: 1e+20} ],
                 "soplex800-unbounded" : [ {
@@ -646,8 +650,10 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.Unbounded,
                     "OriginalProblem_Vars": 1,
                     "OriginalProblem_InitialNCons": 1,
+                    "OriginalProblem_MaxNCons": 1,
                     "PresolvedProblem_Vars": 1,
-                    "PresolvedProblem_InitialNCons": 1 }, {
+                    "PresolvedProblem_InitialNCons": 1,
+                    "PresolvedProblem_MaxNCons": 1 }, {
                     Key.PrimalBound: -1e+20,
                     Key.DualBound: -1e+20} ],
                 "soplex800-primalfeasible" : [ {
@@ -661,8 +667,10 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.Interrupted,
                     "OriginalProblem_Vars": 2,
                     "OriginalProblem_InitialNCons": 2,
+                    "OriginalProblem_MaxNCons": 2,
                     "PresolvedProblem_Vars": 2,
-                    "PresolvedProblem_InitialNCons": 2 }, {
+                    "PresolvedProblem_InitialNCons": 2,
+                    "PresolvedProblem_MaxNCons": 2 }, {
                     Key.PrimalBound: 1.0,
                     Key.DualBound: None} ],
                 "soplex800-dualfeasible" : [ {
@@ -676,8 +684,10 @@ class SolverTest(unittest.TestCase):
                     Key.SolverStatus: Key.SolverStatusCodes.Interrupted,
                     "OriginalProblem_Vars": 2,
                     "OriginalProblem_InitialNCons": 2,
+                    "OriginalProblem_MaxNCons": 2,
                     "PresolvedProblem_Vars": 2,
-                    "PresolvedProblem_InitialNCons": 2 }, {
+                    "PresolvedProblem_InitialNCons": 2,
+                    "PresolvedProblem_MaxNCons": 2 }, {
                     Key.PrimalBound: None,
                     Key.DualBound: 1.0} ],
                 "conopt439-tutorial" : [ {
