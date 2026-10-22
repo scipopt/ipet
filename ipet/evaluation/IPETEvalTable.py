@@ -1786,7 +1786,7 @@ class IPETEvaluation(IpetNode):
             filtergroupdata = self.applyFilterGroup(reduceddata, fg, self.getRowIndex())
             if (len(filtergroupdata) == 0):
                 nonemptyactivefiltergroups.remove(fg)
-                logger.warning("Filtergroup {} is empty and has been deactived.".format(fg.getName()))
+                logger.warning("Filtergroup {} is empty and has been deactivated.".format(fg.getName()))
                 continue
             logger.debug("Reduced data for filtergroup {} is:\n{}".format(fg.getName(), filtergroupdata))
             self.filtered_instancewise[fg.name] = self.convertToHorizontalFormat(filtergroupdata)
@@ -2019,7 +2019,8 @@ class IPETEvaluation(IpetNode):
             #
             # store the result (either by applying the filter, or by copying)
             #
-            f.storeResult(df, fcol)
+            if fcol is not None:
+                f.storeResult(df, fcol)
 
 
 if __name__ == '__main__':

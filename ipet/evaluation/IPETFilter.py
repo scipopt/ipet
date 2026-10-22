@@ -95,8 +95,8 @@ class IPETComparison:
         try:
             return method(x, y)
         except TypeError as t:
-            logger.error("Got type error %s comparing elements x:%s and y:%s" % (t, x, y))
-            return 0
+            logger.warning("Got type error %s comparing elements x:%s and y:%s" % (t, str(x).split('\n')[0], str(y).split('\n')[0]))
+            return None
 
     def method_le(self, x, y):
         return x <= y
@@ -328,6 +328,8 @@ class IPETFilter(IpetNode):
         | one        |equal     |True, if at least one value occurs twice in a group |
         | all        |equal     |True, if there is only a single value for this group |
         """
+        if self.datakey not in df.columns:
+            return None
 
         #
         # 1. chose the right list function
@@ -419,7 +421,11 @@ class IPETFilter(IpetNode):
         """
         if self.operator in self.listoperators:
             filtercol = self.applyListOperator(df, groupindex)
+            if filtercol is None:
+                return None
         elif self.operator in self.valueoperators:
+            if self.datakey not in df.columns:
+                return None
             filtercol = self.applyValueOperator(df[[self.datakey]])
 
         else:
@@ -434,6 +440,8 @@ class IPETFilter(IpetNode):
             except:
                 pass
             filtercol = self.comparison.compare(x, y)
+            if filtercol is None:
+                return None
 
         if groupindex is None:
             return filtercol
@@ -661,6 +669,8 @@ class IPETFilterGroup(IpetNode):
             else:
                 # apply the filter to the data frame rowwise and store the result in a temporary boolean column
                 fcol = f_.applyFilter(df, index)
+                if fcol is None:
+                    return [False]*len(df.index)
 
             if intersection_index is not None:
                 intersection_index = intersection_index & fcol
