@@ -20,6 +20,7 @@ DEFAULT_FEASTOL = 1e-6
 class SolufileMarkers:
     OPT = "=opt="
     INF = "=inf="
+    UNBD = "=unbd="
     BEST = "=best="
     UNKN = "=unkn="
     BESTDUAL = "=bestdual="
@@ -172,6 +173,8 @@ class Validation:
                 elif marker == SolufileMarkers.INF:
                     infotuple[self.__primalidx__] = self.__infeas__
 
+                elif marker == SolufileMarkers.UNBD:
+                    infotuple[self.__dualidx__] = self.__infeas__
 
                 soludict[problemname] = tuple(infotuple)
         return soludict
@@ -287,7 +290,7 @@ class Validation:
         """
         reference = self.referencedict.get(problemname, (None, None))
 
-        if self.isUnkn(reference) or self.isInf(reference) or self.isFeas(reference):
+        if self.isUnkn(reference) or self.isInf(reference) or self.isFeas(reference) or self.isUnbounded(reference):
             return None
         else:
             return reference[self.__primalidx__]
@@ -307,7 +310,7 @@ class Validation:
         """
         reference = self.referencedict.get(problemname, (None, None))
 
-        if self.isUnkn(reference) or self.isInf(reference) or self.isFeas(reference):
+        if self.isUnkn(reference) or self.isInf(reference) or self.isFeas(reference) or self.isUnbounded(reference):
             return None
         else:
             return reference[self.__dualidx__]
@@ -384,6 +387,22 @@ class Validation:
             True if reference bound is infeasible, False otherwise
         """
         return referencetuple[self.__primalidx__] == self.__infeas__
+
+    def isUnbounded(self, referencetuple : tuple) -> bool:
+        """is this an unbounded reference?
+
+        Parameters:
+        -----------
+
+        referencetuple : tuple
+            tuple containing a primal and dual reference bound
+
+        Return:
+        -------
+        bool
+            True if reference bound is unbounded, False otherwise
+        """
+        return referencetuple[self.__dualidx__] == self.__infeas__
 
     def isFeas(self, referencetuple):
         """is this a feasible reference?
@@ -482,6 +501,10 @@ class Validation:
         elif self.isInf(reference):
             if sstatus != SolverStatusCodes.Infeasible and not pd.isna(pb) and not isInf(pb):
                 return ProblemStatusCodes.FailSolOnInfeasibleInstance
+
+        elif self.isUnbounded(reference):
+            if sstatus != SolverStatusCodes.Unbounded and not pd.isna(db) and not isInf(db):
+                return ProblemStatusCodes.FailDualBound
 
         elif self.isFeas(reference):
             if sstatus == SolverStatusCodes.Infeasible:
